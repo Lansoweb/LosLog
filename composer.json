@@ -22,7 +22,7 @@
         "zendframework/zendframework": "2.*"
     },
     "suggest": {
-        "doctrine/doctrine-module": "doctrine-module if you want to use the SqlLogger"
+        "doctrine/doctrine-module": "doctrine-module if you want to use the SqlLogger",
         "doctrine/doctrine-orm-module": "doctrine-orm-module if you want to use the EntityLogger"
     },
     "minimum-stability": "alpha",
