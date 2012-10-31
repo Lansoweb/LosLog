@@ -53,7 +53,7 @@ For composer documentation, please refer to [getcomposer.org](http://getcomposer
 
 ### Installation without composer
 
-  1. Clone this module [LosLicense](http://github.com/LansoWeb/LosLog) to your vendor directory
+  1. Clone this module [LosLog](http://github.com/LansoWeb/LosLog) to your vendor directory
   2. Enable it in your config/application.config.php like the step 4 in the previous section.
 
 ## Usage
