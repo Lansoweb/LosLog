@@ -21,7 +21,7 @@ class StaticLoggerTest extends \PHPUnit_Framework_TestCase
         $logger = StaticLogger::getInstance();
         $logger->debug('testDevLogger');
 
-        $log = file_get_contents('data/logs/dev.log');
+        $log = file_get_contents('data/logs/static.log');
 
         $this->assertContains('testDevLogger', $log);
     }
@@ -30,7 +30,7 @@ class StaticLoggerTest extends \PHPUnit_Framework_TestCase
     {
         StaticLogger::save('testDev');
 
-        $log = file_get_contents('data/logs/dev.log');
+        $log = file_get_contents('data/logs/static.log');
 
         $this->assertContains('testDev', $log);
     }
