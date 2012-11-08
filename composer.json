@@ -2,7 +2,7 @@
     "name": "los/loslog",
     "description": "LosLog provides some log utility your ZF2 application",
     "type": "library",
-    "license": "MIT",
+    "license": "BSD-3",
     "keywords": [
         "los",
         "log",
@@ -30,6 +30,9 @@
         "psr-0": {
             "LosLog\\": "src/",
             "LosLogTest\\": "tests/"
-        }
+        },
+        "classmap": [
+            "./"
+        ]
     }
 }
