@@ -48,6 +48,12 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
                     $logger,
                     'dispatchError'
                 ), - 100);
+            $events = $e->getApplication()->getEventManager()->getSharedManager();
+            $events->attach('*','save.invalid', function($e) use ($sm, $logger) {
+                $form = $e->getParam('form');
+                $entity = $e->getParam('entity');
+                $logger->crit('Erro salvando form: ' . print_r($form->getMessages(),true));
+            });
         }
 
         if ($config->getUseSqlLogger()) {
