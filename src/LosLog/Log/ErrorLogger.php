@@ -30,7 +30,7 @@ class ErrorLogger extends AbstractLogger
      * @return boolean Returna always false to enable other handlers, including the default
      * @throws Exception\InvalidArgumentException if logger is null
      */
-    public static function registerErrorHandler (Logger $logger)
+    public static function registerErrorHandler (Logger $logger, $continueNativeHandler = false)
     {
         // Only register once per instance
         if (self::$registeredErrorHandler) {
@@ -56,9 +56,9 @@ class ErrorLogger extends AbstractLogger
                 E_USER_DEPRECATED => self::DEBUG
         );
 
-        set_error_handler(
+        $previous = set_error_handler(
                 function  ($errno, $errstr, $errfile, $errline, $errcontext) use(
-                $errorHandlerMap, $logger)
+                $errorHandlerMap, $logger, $continueNativeHandler)
                 {
                     $errorLevel = error_reporting();
 
@@ -69,6 +69,8 @@ class ErrorLogger extends AbstractLogger
                             $priority = \Zend\Log\Logger::INFO;
                         }
                         $logger->log($priority,'Error: ' . $errstr . ' in ' . $errfile .' in line ' . $errline);
+                        
+                        return !$continueNativeHandler;
                     }
                 });
 
@@ -84,8 +86,7 @@ class ErrorLogger extends AbstractLogger
                 });
 
         self::$registeredErrorHandler = true;
-
-        return false;
+        return $previous;
     }
 
     /**
@@ -192,7 +193,7 @@ class ErrorLogger extends AbstractLogger
     public static function registerHandlers($logFile = 'error.log', $logDir = 'data/logs')
     {
         $logger = new self($logFile, $logDir);
-        self::registerErrorHandler($logger);
+        self::registerErrorHandler($logger, true);
         self::registerExceptionHandler($logger);
     }
 }
