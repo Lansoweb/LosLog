@@ -22,7 +22,6 @@ use Zend\Log;
  */
 class ErrorLogger extends AbstractLogger
 {
-
     /**
      * Registers an error handler for PHP errors
      *
