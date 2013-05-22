@@ -69,7 +69,7 @@ class ErrorLogger extends AbstractLogger
                             $priority = \Zend\Log\Logger::INFO;
                         }
                         $logger->log($priority,'Error: ' . $errstr . ' in ' . $errfile .' in line ' . $errline);
-                        
+
                         return !$continueNativeHandler;
                     }
                 });
@@ -161,11 +161,11 @@ class ErrorLogger extends AbstractLogger
             case \Zend\Mvc\Application::ERROR_CONTROLLER_NOT_FOUND:
             case \Zend\Mvc\Application::ERROR_CONTROLLER_INVALID:
             case \Zend\Mvc\Application::ERROR_ROUTER_NO_MATCH:
+            case 'error-route-unauthorized':
                 // Specifically not handling these
                 return;
 
             case \Zend\Mvc\Application::ERROR_EXCEPTION:
-            default:
                 $exception = $e->getParam('exception');
                 $msg = '';
                 $prev = $exception->getPrevious();
@@ -182,6 +182,11 @@ class ErrorLogger extends AbstractLogger
                                  'Trace:' . PHP_EOL .
                                  $exception->getTraceAsString());
                 break;
+            default:
+                $this->log(ErrorLogger::ERR,
+                'Erro desconhecido no dispatch: ' . $error);
+                break;
+
         }
     }
 
