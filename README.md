@@ -29,7 +29,7 @@ For composer documentation, please refer to [getcomposer.org](http://getcomposer
      }
      ```
   3. Run `php composer.phar install`
-  4. Open `my/project/directory/config/application.config.php` and add `LosLicense` to your `modules`
+  4. Open `my/project/directory/config/application.config.php` and add `LosLog` to your `modules`
      
      Usually insert as the first module to enable catch errors and exceptions in all modules.
   
