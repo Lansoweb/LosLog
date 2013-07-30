@@ -167,6 +167,10 @@ class ErrorLogger extends AbstractLogger
 
             case \Zend\Mvc\Application::ERROR_EXCEPTION:
                 $exception = $e->getParam('exception');
+                if (!($exception instanceof \Exception))
+                {
+                    return;
+                }
                 $msg = '';
                 $prev = $exception->getPrevious();
                 while ($prev != null) {

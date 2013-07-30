@@ -58,7 +58,14 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 
         if ($config->getUseSqlLogger()) {
             $sqlLogger = $sm->get('LosLog\Log\SqlLogger');
-            $em->getConfiguration()->setSQLLogger($sqlLogger);
+            if (null !== $em->getConfiguration()->getSQLLogger()) {
+                $logger = new LoggerChain();
+                $logger->addLogger($sqlLogger);
+                $logger->addLogger($em->getConfiguration()->getSQLLogger());
+                $em->getConfiguration()->setSQLLogger($logger);
+            } else {
+                $em->getConfiguration()->setSQLLogger($sqlLogger);
+            }
         }
     }
 
