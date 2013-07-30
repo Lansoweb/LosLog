@@ -7,7 +7,7 @@
  * @copyright  2011-2012 Leandro Silva
  */
 namespace LosLog\Log;
-use Doctrine\Common\EventSubscriber;
+use \Doctrine\Common\EventSubscriber;
 
 /**
  * Logs all entity operations in the database
