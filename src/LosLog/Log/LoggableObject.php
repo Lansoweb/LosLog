@@ -1,6 +1,6 @@
 <?php
 /**
- * Logs all doctrine database operations
+ * Base class for loggable objects
  *
  * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
@@ -10,12 +10,9 @@
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Log;
-use LosLog\Log\AbstractLogger;
-
-use Doctrine\DBAL\Logging\SQLLogger as LogInterface;
 
 /**
- * Logs all doctrine database operations
+ * Base class for loggable objects
  *
  * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
@@ -24,28 +21,27 @@ use Doctrine\DBAL\Logging\SQLLogger as LogInterface;
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
-class SqlLogger extends AbstractLogger implements LogInterface
+class LoggableObject
 {
-    /*
-     * (non-PHPdoc)
-     * @see \Doctrine\DBAL\Logging\SQLLogger::startQuery()
+    /**
+     * Function to collect properties values
+     *
+     * @return array Array contendo as propriedades do object e seus valores
      */
-    public function startQuery ($sql, array $params = null, array $types = null)
+    public function losLogMe()
     {
-        $msg = 'SQL: ' . $sql;
-        if ($params) {
-            $msg .= PHP_EOL . "\tPARAMS: " . json_encode($params);
+        $ret[get_class($this)] = array();
+        foreach(get_object_vars($this) as $name => $content)
+        {
+            if (!is_object($content))
+            {
+                $ret[$name] = array('type' => gettype($content), 'content' => $content);
+            }
+            else
+            {
+                $ret[$name] = array('type' => gettype($content), 'class' => get_class($content));
+            }
         }
-        if ($types) {
-            $msg .= PHP_EOL . "\tTYPES: " . json_encode($types);
-        }
-        $this->debug($msg);
+        return $ret;
     }
-
-    /*
-     * (non-PHPdoc)
-     * @see \Doctrine\DBAL\Logging\SQLLogger::stopQuery()
-     */
-    public function stopQuery ()
-    {}
 }

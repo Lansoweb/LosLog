@@ -2,9 +2,12 @@
 /**
  * Development logger
  *
- * @package    LosLos\Log
- * @author     Leandro Silva <lansoweb@hotmail.com>
- * @copyright  2011-2012 Leandro Silva
+ * @package   LosLog\Log
+ * @author    Leandro Silva <leandro@leandrosilva.info>
+ * @link      http://leandrosilva.info Development Blog
+ * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
+ * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Log;
 
@@ -14,9 +17,12 @@ use LosLog\Log\AbstractLogger;
 /**
  * Development logger
  *
- * @package    LosLos\Log
- * @author     Leandro Silva <lansoweb@hotmail.com>
- * @copyright  2011-2012 Leandro Silva
+ * @package   LosLog\Log
+ * @author    Leandro Silva <leandro@leandrosilva.info>
+ * @link      http://leandrosilva.info Development Blog
+ * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
+ * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 class StaticLogger extends AbstractLogger
 {
@@ -30,13 +36,17 @@ class StaticLogger extends AbstractLogger
     /**
      * Saves a message to a logfile
      *
-     * @param string $message
+     * @param mixed $message
      * @param string $filename
      * @param string $logDir
      */
     public static function save($message, $logFile = 'static.log', $logDir = 'data/logs')
     {
         $logger = static::getInstance($logFile, $logDir);
+        if (is_object($message) && $message instanceof LoggableObject)
+        {
+            $message = json_encode($message->losLogMe());
+        }
         $logger->debug($message);
     }
 

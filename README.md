@@ -164,7 +164,7 @@ Edit the config/autoload/loslog.global.php file to enable this logger.
 The default logfile is data/log/sql.log
 
 ### StaticLogger
-This logger is usually used to log development or debug messages. Just call it statically anywhere in your code.
+This logger is usually used to log development or debug messages, arrays and objects. Just call it statically anywhere in your code.
 
 ```php
 LosLog\Log\StaticLogger::save("Test message");
@@ -173,6 +173,15 @@ LosLog\Log\StaticLogger::save("Test message 2", 'test.log');
 will generate
 ```
 2012-10-29T19:32:30-02:00 DEBUG (6): Test message
+```
+
+Or an object:
+```php
+LosLog\Log\StaticLogger::save($myObj);
+```
+will generate
+```
+2013-07-30T17:26:37-03:00 DEBUG (7): {"User\\Entity\\User":[],"nome":{"type":"string","content":"Leandro"},"sobrenome":{"type":"string","content":"Silva"},"permissao":{"type":"string","content":"usuario"},"email":{"type":"string","content":"leandro@leandrosilva.info"},"acessos":{"type":"object","class":"Doctrine\\ORM\\PersistentCollection"},"login":{"type":"NULL","content":null},"senha":{"type":"string","content":"admin"},"inputFilter":{"type":"NULL","content":null},"id":{"type":"integer","content":3},"cadastrado":{"type":"object","class":"DateTime"},"atualizado":{"type":"object","class":"DateTime"}}
 ```
 
 Optionally, you can get it through Service Locator
