@@ -75,7 +75,7 @@ abstract class AbstractLogger extends Logger
     /**
      * Setter for log dir
      *
-     * @param string $logDir
+     * @param  string                    $logDir
      * @throws \InvalidArgumentException
      */
     public function setLogDir($logDir)

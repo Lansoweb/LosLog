@@ -28,7 +28,7 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
     /*
      * (non-PHPdoc) @see \Doctrine\Common\EventSubscriber::getSubscribedEvents()
      */
-    public function getSubscribedEvents ()
+    public function getSubscribedEvents()
     {
         return array(
             'onFlush'
@@ -40,7 +40,7 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
      *
      * @param \Doctrine\ORM\Event\OnFlushEventArgs $eventArgs
      */
-    public function onFlush (OnFlushEventArgs $eventArgs)
+    public function onFlush(OnFlushEventArgs $eventArgs)
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();

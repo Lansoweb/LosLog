@@ -83,7 +83,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $logDir
      */
-    public function getLogDir ()
+    public function getLogDir()
     {
         return $this->logDir;
     }
@@ -91,7 +91,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param string $logDir
      */
-    public function setLogDir ($logDir)
+    public function setLogDir($logDir)
     {
         $logDir = trim($logDir);
         if (!file_exists($logDir)) {
@@ -107,7 +107,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $useEntityLogger
      */
-    public function getUseEntityLogger ()
+    public function getUseEntityLogger()
     {
         return $this->useEntityLogger;
     }
@@ -115,7 +115,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param boolean $useEntityLogger
      */
-    public function setUseEntityLogger ($useEntityLogger)
+    public function setUseEntityLogger($useEntityLogger)
     {
         $this->useEntityLogger = $useEntityLogger;
     }
@@ -123,7 +123,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $useSqlLogger
      */
-    public function getUseSqlLogger ()
+    public function getUseSqlLogger()
     {
         return $this->useSqlLogger;
     }
@@ -131,14 +131,14 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param boolean $useSqlLogger
      */
-    public function setUseSqlLogger ($useSqlLogger)
+    public function setUseSqlLogger($useSqlLogger)
     {
         $this->useSqlLogger = $useSqlLogger;
     }
     /**
      * @return the $useAppLogger
      */
-    public function getUseAppLogger ()
+    public function getUseAppLogger()
     {
         return $this->useAppLogger;
     }
@@ -146,14 +146,14 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param boolean $useAppLogger
      */
-    public function setUseAppLogger ($useAppLogger)
+    public function setUseAppLogger($useAppLogger)
     {
         $this->useAppLogger = $useAppLogger;
     }
     /**
      * @return the $entityLoggerFile
      */
-    public function getEntityLoggerFile ()
+    public function getEntityLoggerFile()
     {
         return $this->entityLoggerFile;
     }
@@ -161,7 +161,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param string $entityLoggerFile
      */
-    public function setEntityLoggerFile ($entityLoggerFile)
+    public function setEntityLoggerFile($entityLoggerFile)
     {
         $this->entityLoggerFile = $entityLoggerFile;
     }
@@ -169,7 +169,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $sqlLoggerFile
      */
-    public function getSqlLoggerFile ()
+    public function getSqlLoggerFile()
     {
         return $this->sqlLoggerFile;
     }
@@ -177,7 +177,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param string $sqlLoggerFile
      */
-    public function setSqlLoggerFile ($sqlLoggerFile)
+    public function setSqlLoggerFile($sqlLoggerFile)
     {
         $this->sqlLoggerFile = $sqlLoggerFile;
     }
@@ -185,7 +185,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $useErrorLogger
      */
-    public function getUseErrorLogger ()
+    public function getUseErrorLogger()
     {
         return $this->useErrorLogger;
     }
@@ -193,7 +193,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param boolean $useErrorLogger
      */
-    public function setUseErrorLogger ($useErrorLogger)
+    public function setUseErrorLogger($useErrorLogger)
     {
         $this->useErrorLogger = $useErrorLogger;
     }
@@ -201,7 +201,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $errorLoggerFile
      */
-    public function getErrorLoggerFile ()
+    public function getErrorLoggerFile()
     {
         return $this->errorLoggerFile;
     }
@@ -209,7 +209,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param string $errorLoggerFile
      */
-    public function setErrorLoggerFile ($errorLoggerFile)
+    public function setErrorLoggerFile($errorLoggerFile)
     {
         $this->errorLoggerFile = $errorLoggerFile;
     }
@@ -217,7 +217,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return the $staticLoggerFile
      */
-    public function getStaticLoggerFile ()
+    public function getStaticLoggerFile()
     {
         return $this->staticLoggerFile;
     }
@@ -225,7 +225,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param string $staticLoggerFile
      */
-    public function setStaticLoggerFile ($staticLoggerFile)
+    public function setStaticLoggerFile($staticLoggerFile)
     {
         $this->staticLoggerFile = $staticLoggerFile;
     }

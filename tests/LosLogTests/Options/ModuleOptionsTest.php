@@ -24,7 +24,7 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp ()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -38,26 +38,26 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown ()
+    protected function tearDown()
     {
         $this->ModuleOptions = null;
 
         parent::tearDown();
     }
 
-    public function testDefaultOptions ()
+    public function testDefaultOptions()
     {
         $options = new ModuleOptions();
         $this->assertEquals('data/logs', $options->getLogDir());
         $this->assertFalse($options->getUseEntityLogger());
     }
 
-    public function testGetLogDir ()
+    public function testGetLogDir()
     {
         $this->assertEquals('/tmp', $this->ModuleOptions->getLogDir());
     }
 
-    public function testSetLogDir ()
+    public function testSetLogDir()
     {
         $dir = sys_get_temp_dir();
         $this->ModuleOptions->setLogDir($dir);
@@ -67,18 +67,18 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testInvalidLogDir ()
+    public function testInvalidLogDir()
     {
         $dir = sys_get_temp_dir() . uniqid();
         $this->ModuleOptions->setLogDir($dir);
     }
 
-    public function testGetUseEntityLogger ()
+    public function testGetUseEntityLogger()
     {
         $this->assertTrue($this->ModuleOptions->getUseEntityLogger());
     }
 
-    public function testSetEntityLogDebug ()
+    public function testSetEntityLogDebug()
     {
         $this->ModuleOptions->setUseEntityLogger(false);
         $this->assertFalse($this->ModuleOptions->getUseEntityLogger());

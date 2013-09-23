@@ -17,7 +17,7 @@ class SqlLoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger = new SqlLogger('sql.log');
     }
 
-    public function testSQLLogger ()
+    public function testSQLLogger()
     {
         $this->markTestIncomplete(
                 'This test has not been implemented yet.'

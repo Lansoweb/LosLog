@@ -6,14 +6,13 @@
  * @author     Leandro Silva <lansoweb@hotmail.com>
  * @copyright  2011-2012 Leandro Silva
  */
-namespace LosLogTests;
+namespace LosLogtests;
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 use RuntimeException;
-use Doctrine\ORM\Tools\SchemaTool;
 
 error_reporting ( E_ALL | E_STRICT );
 chdir ( __DIR__ );
@@ -127,6 +126,7 @@ class Bootstrap
                 return false;
             $previousDir = $dir;
         }
+
         return $dir . '/' . $path;
     }
 }

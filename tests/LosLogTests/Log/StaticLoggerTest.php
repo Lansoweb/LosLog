@@ -16,7 +16,7 @@ class StaticLoggerTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    public function testInstanceLog ()
+    public function testInstanceLog()
     {
         $logger = StaticLogger::getInstance();
         $logger->debug('testDevLogger');
@@ -26,7 +26,7 @@ class StaticLoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('testDevLogger', $log);
     }
 
-    public function testStaticLog ()
+    public function testStaticLog()
     {
         StaticLogger::save('testDev');
 
