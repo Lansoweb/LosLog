@@ -10,7 +10,8 @@
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Log;
-use \Doctrine\Common\EventSubscriber;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 
 /**
  * Logs all entity operations in the database
@@ -39,7 +40,7 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
      *
      * @param \Doctrine\ORM\Event\OnFlushEventArgs $eventArgs
      */
-    public function onFlush (\Doctrine\ORM\Event\OnFlushEventArgs $eventArgs)
+    public function onFlush (OnFlushEventArgs $eventArgs)
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();

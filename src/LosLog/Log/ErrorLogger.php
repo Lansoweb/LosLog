@@ -14,8 +14,6 @@ use Zend\Log\Logger;
 
 use LosLog\Log\AbstractLogger;
 
-use Zend\Log;
-
 /**
  * Logs errors and exceptions
  *

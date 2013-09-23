@@ -11,7 +11,7 @@
  */
 namespace LosLog\Log;
 use LosLog\Log\AbstractLogger;
-
+use Doctrine\DBAL\Logging\LoggerChain;
 use Doctrine\DBAL\Logging\SQLLogger as LogInterface;
 
 /**
@@ -48,4 +48,16 @@ class SqlLogger extends AbstractLogger implements LogInterface
      */
     public function stopQuery ()
     {}
+
+    public function addLoggerTo($em)
+    {
+        if (null !== $em->getConfiguration()->getSQLLogger()) {
+            $logger = new LoggerChain();
+            $logger->addLogger($this);
+            $logger->addLogger($em->getConfiguration()->getSQLLogger());
+            $em->getConfiguration()->setSQLLogger($logger);
+        } else {
+            $em->getConfiguration()->setSQLLogger($this);
+        }
+    }
 }

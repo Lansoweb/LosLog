@@ -94,8 +94,11 @@ class ModuleOptions extends AbstractOptions
     public function setLogDir ($logDir)
     {
         $logDir = trim($logDir);
-        if (!file_exists($logDir) || !is_writable($logDir)) {
-            throw new \InvalidArgumentException("Invalid log directory!");
+        if (!file_exists($logDir)) {
+            throw new \InvalidArgumentException("Directory does not exist!");
+        }
+        if (!is_writable($logDir)) {
+            throw new \InvalidArgumentException("Directory not writable!");
         }
 
         $this->logDir = $logDir;
