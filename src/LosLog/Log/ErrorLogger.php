@@ -29,8 +29,8 @@ class ErrorLogger extends AbstractLogger
     /**
      * Registers an error handler for PHP errors
      *
-     * @param LosLog\Log\ErrorLogger $logger
-     * @return boolean Returna always false to enable other handlers, including the default
+     * @param  LosLog\Log\ErrorLogger             $logger
+     * @return boolean                            Returna always false to enable other handlers, including the default
      * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerErrorHandler (Logger $logger, $continueNativeHandler = false)
@@ -78,7 +78,7 @@ class ErrorLogger extends AbstractLogger
                 });
 
         register_shutdown_function(
-                function() use($logger) {
+                function() use ($logger) {
                     $error = error_get_last();
                     if (null === $error) {
                         return false;
@@ -89,14 +89,15 @@ class ErrorLogger extends AbstractLogger
                 });
 
         self::$registeredErrorHandler = true;
+
         return $previous;
     }
 
     /**
      * Registers an exception handler
      *
-     * @param LosLog\Log\ErrorLogger $logger
-     * @return boolean Returna always false to enable other handlers, including the default
+     * @param  LosLog\Log\ErrorLogger             $logger
+     * @return boolean                            Returna always false to enable other handlers, including the default
      * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerExceptionHandler (Logger $logger)
@@ -111,7 +112,7 @@ class ErrorLogger extends AbstractLogger
         }
 
         set_exception_handler(
-                function  ($exception) use( $logger) {
+                function  ($exception) use ( $logger) {
                     /* var $exception Exception */
                     $extra = array(
                             'file' => $exception->getFile(),
@@ -170,8 +171,7 @@ class ErrorLogger extends AbstractLogger
 
             case \Zend\Mvc\Application::ERROR_EXCEPTION:
                 $exception = $e->getParam('exception');
-                if (!($exception instanceof \Exception))
-                {
+                if (!($exception instanceof \Exception)) {
                     return;
                 }
                 $msg = '';

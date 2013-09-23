@@ -13,7 +13,6 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 use RuntimeException;
-use Doctrine\ORM\Tools\SchemaTool;
 
 error_reporting ( E_ALL | E_STRICT );
 chdir ( __DIR__ );
@@ -127,6 +126,7 @@ class Bootstrap
                 return false;
             $previousDir = $dir;
         }
+
         return $dir . '/' . $path;
     }
 }

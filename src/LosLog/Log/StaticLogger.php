@@ -11,7 +11,6 @@
  */
 namespace LosLog\Log;
 
-use Zend\Log\Writer\Stream;
 use LosLog\Log\AbstractLogger;
 
 /**
@@ -36,15 +35,14 @@ class StaticLogger extends AbstractLogger
     /**
      * Saves a message to a logfile
      *
-     * @param mixed $message
+     * @param mixed  $message
      * @param string $filename
      * @param string $logDir
      */
     public static function save($message, $logFile = 'static.log', $logDir = 'data/logs')
     {
         $logger = static::getInstance($logFile, $logDir);
-        if (is_object($message) && $message instanceof LoggableObject)
-        {
+        if (is_object($message) && $message instanceof LoggableObject) {
             $message = json_encode($message->losLogMe());
         }
         $logger->debug($message);
@@ -53,8 +51,8 @@ class StaticLogger extends AbstractLogger
     /**
      * Gets an instance of this logger and sets the log directory and filename
      *
-     * @param string $logFile
-     * @param string $logDir
+     * @param  string                   $logFile
+     * @param  string                   $logDir
      * @return \LosLog\Log\StaticLogger
      */
     public static function getInstance($logFile = 'static.log', $logDir = 'data/logs')
