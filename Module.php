@@ -61,6 +61,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
         }
 
         if ($config->getUseSqlLogger()) {
+            $em = $sm->get('doctrine.entitymanager.orm_default');
             $sqlLogger = $sm->get('LosLog\Log\SqlLogger');
             $sqlLogger->addLoggerTo($em);
         }
