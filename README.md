@@ -134,7 +134,7 @@ public static function dump($entity, $maxDepth = 1, $toHtml = true)
 ```
 
 The second argument indicates how depth will be the dump (other classes as properties, including collections) with default to 1 
-and the third if the output will be HTML friendly (encloses the output in a <pre> tag) or false for a console version with a default to true.
+and the third if the output will be HTML friendly (encloses the output in a "pre" tag) or false for a console version with a default to true.
 
 ```php
 echo \LosLog\Log\EntityLogger::dump($entity, 2);
@@ -158,7 +158,7 @@ stdClass Object
     [created] => stdClass Object
         (
             [__CLASS__] => DateTime
-            [date] => 2014-06-13T13:06:29-03:00
+            [date] => 2014-09-28T07:06:29-03:00
             [timezone] => America/Sao_Paulo
         )
 )
