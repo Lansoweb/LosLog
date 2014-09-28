@@ -12,6 +12,7 @@
 namespace LosLog\Log;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\Common\Util\Debug;
 
 /**
  * Logs all entity operations in the database
@@ -76,5 +77,17 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
         //TODO
         //foreach ($uow->getScheduledCollectionDeletions() as $col) {}
         //foreach ($uow->getScheduledCollectionUpdates() as $col) {}
+    }
+
+    public static function dump($entity, $maxDepth = 1, $toHtml = true)
+    {
+        $output = print_r(Debug::export($entity, $maxDepth), true);
+
+        if ($toHtml) {
+            echo "<pre>$output</pre>";
+        }
+        else {
+            echo $output;
+        }
     }
 }
