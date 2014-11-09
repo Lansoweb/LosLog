@@ -6,7 +6,7 @@ This module provides some useful log classes:
 - ErrorLogger  = PHP error and Exception
 - EntityLogger = Doctrine ORM Entity
 - SqlLogger    = Doctrine DBAL SQL
-- StaticLogger = "Shortcut" to a generic file logger
+- StaticLogger = "Shortcut" to a generic file logger. Can be attached to the Z-Ray in Zend Server (NEW)
 
 ## Requirements
 This module only requires zendframework 2 [framework.zend.com](http://framework.zend.com/).
@@ -291,3 +291,37 @@ $logger = $sm->get('LosLog\Log\StaticLogger');
 $logger->debug("Test message");
 ```
 The default logfile is data/log/static.log
+
+#### Z-Ray
+Z-Ray is an awesome resource from Zend Server that provides several information about the request, errors and the framework. It also has the possibility to add your own informations, so i added the StaticLogger messages to it.
+
+More information can be seen [here](http://www.zend.com/en/products/server/z-ray-top-7-features).
+
+Warning: The Z-Ray extensions works only on Zend Server 8 or greater.
+
+##### Installation
+To use the StaticLogger with Z-Ray, follow these steps:
+
+1- Locate the zray extension directory inside the zend server. 
+
+For example on Mac/Linux can be found on:
+/usr/local/zend/var/zray/extesions
+
+2- Create a directory called LosLog
+
+3- Copy the zray.php and logo.png to this directory
+
+The final result should be:
+```
+ls /usr/local/zend/var/zray/extensions/LosLog/
+logo.png	zray.php
+```
+
+##### Usage
+Just use the StatticLogger and the messages will appear inside a LosLog section of the Z-Ray bar.
+
+Optionally, you can pass a "null" value to the file argument to use just the Z-Ray, without writing the message to a file:
+
+```php
+LosLog\Log\StaticLogger::save("Test message", null);
+```
