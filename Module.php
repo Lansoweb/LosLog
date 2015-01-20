@@ -46,10 +46,10 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             $em = $sm->get('doctrine.entitymanager.orm_default');
 
             $eventManager = $e->getApplication()->getEventManager();
-            $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR, array(
+            $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR, [
                 $logger,
                 'dispatchError'
-            ), - 100);
+            ], - 100);
             $events = $e->getApplication()
                 ->getEventManager()
                 ->getSharedManager();
@@ -69,12 +69,12 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 
     public function getServiceConfig()
     {
-        return array(
-            'factories' => array(
+        return [
+            'factories' => [
                 'loslog_options' => function ($sm) {
                     $config = $sm->get('Configuration');
 
-                    return new ModuleOptions(isset($config['loslog']) ? $config['loslog'] : array());
+                    return new ModuleOptions(isset($config['loslog']) ? $config['loslog'] : []);
                 },
                 'LosLog\Log\EntityLogger' => function ($sm) {
                     $config = $sm->get('loslog_options');
@@ -100,28 +100,28 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 
                     return $logger;
                 }
-            ),
-            'aliases' => array(
+            ],
+            'aliases' => [
                 'loslog_entitylogger' => 'LosLog\Log\EntityLogger',
                 'loslog_errorlogger' => 'LosLog\Log\ErrorLogger',
                 'loslog_sqllogger' => 'LosLog\Log\SqlLogger',
                 'loslog_staticlogger' => 'LosLog\Log\StaticLogger'
-            )
-        );
+            ]
+        ];
     }
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+        return [
+            'Zend\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php'
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            ],
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
 
     public function getConfig()

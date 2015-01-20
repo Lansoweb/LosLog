@@ -31,9 +31,9 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'onFlush'
-        );
+        ];
     }
 
     /**

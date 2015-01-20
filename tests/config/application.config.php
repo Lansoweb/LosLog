@@ -1,18 +1,18 @@
 <?php
 
-return array(
-        'modules' => array(
+return [
+        'modules' => [
                 'DoctrineModule',
                 'DoctrineORMModule',
                 'LosLog'
-        ),
-        'module_listener_options' => array(
-                'config_glob_paths' => array(
+        ],
+        'module_listener_options' => [
+                'config_glob_paths' => [
                         'config/autoload/{,*.}{global,local}.php',
-                ),
-                'module_paths' => array(
+                ],
+                'module_paths' => [
                         './module',
                         './vendor'
-                )
-        )
-);
+                ]
+        ]
+];

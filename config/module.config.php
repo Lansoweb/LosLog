@@ -1,5 +1,5 @@
 <?php
 namespace LosLog;
-return array(
+return [
         //--
-);
+];

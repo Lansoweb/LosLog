@@ -29,10 +29,10 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->ModuleOptions = new ModuleOptions(
-                array(
+                [
                         'log_dir' => '/tmp',
                         'use_entity_logger' => true
-                ));
+                ]);
     }
 
     /**

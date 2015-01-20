@@ -42,7 +42,7 @@ class ErrorLogger extends AbstractLogger
             throw new \Zend\Log\Exception\InvalidArgumentException('Invalid Logger specified');
         }
 
-        $errorHandlerMap = array(
+        $errorHandlerMap = [
                 E_NOTICE => self::NOTICE,
                 E_USER_NOTICE => self::NOTICE,
                 E_WARNING => self::WARN,
@@ -55,7 +55,7 @@ class ErrorLogger extends AbstractLogger
                 E_STRICT => self::DEBUG,
                 E_DEPRECATED => self::DEBUG,
                 E_USER_DEPRECATED => self::DEBUG
-        );
+        ];
 
         $previous = set_error_handler(
                 function ($errno, $errstr, $errfile, $errline, $errcontext) use (
@@ -112,11 +112,11 @@ class ErrorLogger extends AbstractLogger
         set_exception_handler(
                 function ($exception) use ($logger) {
                     /* var $exception Exception */
-                    $extra = array(
+                    $extra = [
                             'file' => $exception->getFile(),
                             'line' => $exception->getLine(),
                             'trace' => $exception->getTrace()
-                    );
+                    ];
                     if (isset($exception->xdebug_message)) {
                         $extra['xdebug'] = $exception->xdebug_message;
                     }

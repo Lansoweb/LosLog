@@ -1,5 +1,5 @@
 <?php
-$conf = array(
+$conf = [
     /**
      * Default log directory
      */
@@ -39,6 +39,6 @@ $conf = array(
      * Log filename for the DevLogger
      */
     //'dev_logger_file' => 'dev.log'
-);
+];
 
-return array('loslog' => $conf);
+return ['loslog' => $conf];
