@@ -85,8 +85,7 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
 
         if ($toHtml) {
             echo "<pre>$output</pre>";
-        }
-        else {
+        } else {
             echo $output;
         }
     }
