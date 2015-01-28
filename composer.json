@@ -1,29 +1,31 @@
 {
-  "name" : "los/loslog",
-  "description" : "LosLog provides some log utility your ZF2 application",
-  "require" : {
-    "php" : ">=5.4.0",
-    "zendframework/zendframework" : "2.*"
-  },
-  "authors" : [ {
-    "name" : "Leandro Silva",
-    "email" : "lansoweb@hotmail.com",
-    "homepage" : "https://github.com/Lansoweb/"
-  } ],
-  "keywords" : [ "los", "log", "module", "zf2" ],
-  "minimum-stability" : "alpha",
-  "autoload" : {
-    "psr-0" : {
-      "LosLog\\" : "src/",
-      "LosLogTest\\" : "tests/"
+    "name" : "los/loslog",
+    "description" : "LosLog provides some log utility your ZF2 application",
+    "require" : {
+      "php" : ">=5.4.0",
+      "zendframework/zendframework" : "2.*"
     },
-    "classmap" : [ "./" ]
-  },
-  "suggest" : {
-    "doctrine/doctrine-module" : "doctrine-module if you want to use the SqlLogger",
-    "doctrine/doctrine-orm-module" : "doctrine-orm-module if you want to use the EntityLogger"
-  },
-  "license" : "BSD-3",
-  "type" : "library",
-  "homepage" : "http://github.com/Lansoweb/LosLog"
+    "authors" : [ 
+        {
+            "name" : "Leandro Silva",
+            "email" : "leandro@leandrosilva.info",
+            "homepage" : "http://leandrosilva.info"
+        } 
+    ],
+    "keywords" : [ "los", "log", "module", "zf2" ],
+    "minimum-stability" : "alpha",
+    "autoload" : {
+        "psr-0" : {
+          "LosLog\\" : "src/",
+          "LosLogTest\\" : "tests/"
+        },
+        "classmap" : [ "./" ]
+    },
+    "suggest" : {
+        "doctrine/doctrine-module" : "doctrine-module if you want to use the SqlLogger",
+        "doctrine/doctrine-orm-module" : "doctrine-orm-module if you want to use the EntityLogger"
+    },
+    "license" : "BSD-3",
+    "type" : "library",
+    "homepage" : "http://github.com/Lansoweb/LosLog"
 }
