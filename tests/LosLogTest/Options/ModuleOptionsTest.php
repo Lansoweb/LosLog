@@ -6,7 +6,7 @@
  * @author     Leandro Silva <lansoweb@hotmail.com>
  * @copyright  2011-2012 Leandro Silva
  */
-namespace LosLogTests\Options;
+namespace LosLogTest\Options;
 
 use LosLog\Options\ModuleOptions;
 

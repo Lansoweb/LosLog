@@ -1,6 +1,6 @@
 <?php
 
-namespace LosLogTests\Log;
+namespace LosLogTest\Log;
 
 class EntityLoggerTest extends \PHPUnit_Framework_TestCase
 {

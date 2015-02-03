@@ -1,6 +1,6 @@
 <?php
 
-namespace LosLogTests\Log;
+namespace LosLogTest\Log;
 
 use LosLog\Log\ErrorLogger;
 
