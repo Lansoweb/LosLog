@@ -10,6 +10,7 @@ before_install:
   - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
 before_script:
+  - cp -f composer_travis.json composer.json
   - composer install
 
 script:
