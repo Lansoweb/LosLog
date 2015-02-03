@@ -66,5 +66,4 @@ class StaticLogger extends AbstractLogger
 
         return static::$instance;
     }
-
 }

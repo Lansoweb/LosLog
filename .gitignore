@@ -1,3 +1,11 @@
-.buildpath
-.project
-.settings
+/.settings
+/.buildpath
+/.project
+/tests/TestConfiguration.php
+!*.gitadd
+!*.gitkeep
+.DS_Store
+Thumbs.db
+/vendor
+/composer.lock
+/build

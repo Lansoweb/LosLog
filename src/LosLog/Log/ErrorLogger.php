@@ -10,6 +10,7 @@
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Log;
+
 use Zend\Log\Logger;
 
 /**
@@ -21,6 +22,7 @@ use Zend\Log\Logger;
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
+ * @codeCoverageIgnore
  */
 class ErrorLogger extends AbstractLogger
 {
@@ -54,13 +56,12 @@ class ErrorLogger extends AbstractLogger
                 E_RECOVERABLE_ERROR => self::ERR,
                 E_STRICT => self::DEBUG,
                 E_DEPRECATED => self::DEBUG,
-                E_USER_DEPRECATED => self::DEBUG
+                E_USER_DEPRECATED => self::DEBUG,
         ];
 
         $previous = set_error_handler(
                 function ($errno, $errstr, $errfile, $errline, $errcontext) use (
-                $errorHandlerMap, $logger, $continueNativeHandler)
-                {
+                $errorHandlerMap, $logger, $continueNativeHandler) {
                     $errorLevel = error_reporting();
 
                     if ($errorLevel && $errno) {
@@ -69,7 +70,7 @@ class ErrorLogger extends AbstractLogger
                         } else {
                             $priority = \Zend\Log\Logger::INFO;
                         }
-                        $logger->log($priority,'Error: ' . $errstr . ' in ' . $errfile .' in line ' . $errline);
+                        $logger->log($priority, 'Error: '.$errstr.' in '.$errfile.' in line '.$errline);
 
                         return !$continueNativeHandler;
                     }
@@ -82,7 +83,7 @@ class ErrorLogger extends AbstractLogger
                         return false;
                     }
                     $priority = \Zend\Log\Logger::ERR;
-                    $logger->log($priority,'Error: ' . $error['message'] . ' in ' . $error['file'] . ' in line ' .
+                    $logger->log($priority, 'Error: '.$error['message'].' in '.$error['file'].' in line '.
                                      $error['line']);
                 });
 
@@ -115,7 +116,7 @@ class ErrorLogger extends AbstractLogger
                     $extra = [
                             'file' => $exception->getFile(),
                             'line' => $exception->getLine(),
-                            'trace' => $exception->getTrace()
+                            'trace' => $exception->getTrace(),
                     ];
                     if (isset($exception->xdebug_message)) {
                         $extra['xdebug'] = $exception->xdebug_message;
@@ -124,16 +125,16 @@ class ErrorLogger extends AbstractLogger
                     $msg = '';
                     $prev = $exception->getPrevious();
                     while ($prev != null) {
-                        $msg .= PHP_EOL . 'Previous: ' . $prev->getMessage() .
-                                 ' in ' . $prev->getFile() . ' in line ' .
-                                 $prev->getLine() . '.';
+                        $msg .= PHP_EOL.'Previous: '.$prev->getMessage().
+                                 ' in '.$prev->getFile().' in line '.
+                                 $prev->getLine().'.';
                         $prev = $prev->getPrevious();
                     }
                     $logger->log(ErrorLogger::ERR,
-                            'Exception: ' . $exception->getMessage() . ' in ' .
-                                     $exception->getFile() . ' in line ' .
-                                     $exception->getLine() . '.' . $msg . PHP_EOL .
-                                     'Trace:' . PHP_EOL .
+                            'Exception: '.$exception->getMessage().' in '.
+                                     $exception->getFile().' in line '.
+                                     $exception->getLine().'.'.$msg.PHP_EOL.
+                                     'Trace:'.PHP_EOL.
                                      $exception->getTraceAsString());
                 });
         self::$registeredExceptionHandler = true;
@@ -175,21 +176,21 @@ class ErrorLogger extends AbstractLogger
                 $msg = '';
                 $prev = $exception->getPrevious();
                 while ($prev != null) {
-                    $msg .= PHP_EOL . 'Previous: ' . $prev->getMessage() . ' in ' .
-                             $prev->getFile() . ' in line ' . $prev->getLine() .
+                    $msg .= PHP_EOL.'Previous: '.$prev->getMessage().' in '.
+                             $prev->getFile().' in line '.$prev->getLine().
                              '.';
                     $prev = $prev->getPrevious();
                 }
                 $this->log(ErrorLogger::ERR,
-                        'Dispatch: ' . $exception->getMessage() . ' in ' .
-                                 $exception->getFile() . ' in line ' .
-                                 $exception->getLine() . '.' . $msg . PHP_EOL .
-                                 'Trace:' . PHP_EOL .
+                        'Dispatch: '.$exception->getMessage().' in '.
+                                 $exception->getFile().' in line '.
+                                 $exception->getLine().'.'.$msg.PHP_EOL.
+                                 'Trace:'.PHP_EOL.
                                  $exception->getTraceAsString());
                 break;
             default:
                 $this->log(ErrorLogger::ERR,
-                'Erro desconhecido no dispatch: ' . $error);
+                'Erro desconhecido no dispatch: '.$error);
                 break;
 
         }

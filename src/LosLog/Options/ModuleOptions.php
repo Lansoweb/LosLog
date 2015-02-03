@@ -10,6 +10,7 @@
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Options;
+
 use Zend\Stdlib\AbstractOptions;
 
 /**
@@ -136,21 +137,6 @@ class ModuleOptions extends AbstractOptions
         $this->useSqlLogger = $useSqlLogger;
     }
     /**
-     * @return the $useAppLogger
-     */
-    public function getUseAppLogger()
-    {
-        return $this->useAppLogger;
-    }
-
-    /**
-     * @param boolean $useAppLogger
-     */
-    public function setUseAppLogger($useAppLogger)
-    {
-        $this->useAppLogger = $useAppLogger;
-    }
-    /**
      * @return the $entityLoggerFile
      */
     public function getEntityLoggerFile()
@@ -229,5 +215,4 @@ class ModuleOptions extends AbstractOptions
     {
         $this->staticLoggerFile = $staticLoggerFile;
     }
-
 }

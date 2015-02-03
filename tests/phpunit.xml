@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./Bootstrap.php" colors="true"
-	backupGlobals="false">
+<phpunit bootstrap="./bootstrap.php" colors="true" backupGlobals="false">
+    <logging>
+        <log type="coverage-clover" target="../build/logs/clover.xml"/>
+    </logging>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">../vendor</directory>
+            <directory suffix=".php">.</directory>
+        </blacklist>
+    </filter>
 	<testsuite name="Test Suite">
-		<directory>./LosLogTests</directory>
+		<directory>./LosLogTest</directory>
 	</testsuite>
 </phpunit>

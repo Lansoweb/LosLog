@@ -1,4 +1,5 @@
 # LosLog
+[![Build Status](https://travis-ci.org/Lansoweb/LosLog.svg?branch=master)](https://travis-ci.org/Lansoweb/LosLog) [![Latest Stable Version](https://poser.pugx.org/los/loslog/v/stable.svg)](https://packagist.org/packages/los/loslog) [![Total Downloads](https://poser.pugx.org/los/loslog/downloads.svg)](https://packagist.org/packages/los/loslog) [![Coverage Status](https://coveralls.io/repos/Lansoweb/LosLog/badge.svg)](https://coveralls.io/r/Lansoweb/LosLog)
 
 ## Introduction
 This module provides some useful log classes:

@@ -32,7 +32,6 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
  */
 class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 {
-
     /**
      * Module bootstrap
      */
@@ -56,7 +55,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             $events->attach('*', 'save.invalid', function ($e) use ($sm, $logger) {
                 $form = $e->getParam('form');
                 $entity = $e->getParam('entity');
-                $logger->crit('Erro salvando form: ' . print_r($form->getMessages(), true));
+                $logger->crit('Erro salvando form: '.print_r($form->getMessages(), true));
             });
         }
 
@@ -99,13 +98,13 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
                     $logger = StaticLogger::getInstance($config->getStaticLoggerFile(), $config->getLogDir());
 
                     return $logger;
-                }
+                },
             ],
             'aliases' => [
                 'loslog_entitylogger' => 'LosLog\Log\EntityLogger',
                 'loslog_errorlogger' => 'LosLog\Log\ErrorLogger',
                 'loslog_sqllogger' => 'LosLog\Log\SqlLogger',
-                'loslog_staticlogger' => 'LosLog\Log\StaticLogger'
+                'loslog_staticlogger' => 'LosLog\Log\StaticLogger',
             ]
         ];
     }
@@ -114,18 +113,18 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
     {
         return [
             'Zend\Loader\ClassMapAutoloader' => [
-                __DIR__ . '/autoload_classmap.php'
+                __DIR__.'/autoload_classmap.php',
             ],
             'Zend\Loader\StandardAutoloader' => [
                 'namespaces' => [
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
-                ]
+                    __NAMESPACE__ => __DIR__.'/src/'.__NAMESPACE__,
+                ],
             ]
         ];
     }
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__.'/config/module.config.php';
     }
 }

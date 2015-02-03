@@ -10,6 +10,7 @@
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Log;
+
 use Doctrine\DBAL\Logging\LoggerChain;
 use Doctrine\DBAL\Logging\SQLLogger as LogInterface;
 
@@ -31,12 +32,12 @@ class SqlLogger extends AbstractLogger implements LogInterface
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
-        $msg = 'SQL: ' . $sql;
+        $msg = 'SQL: '.$sql;
         if ($params) {
-            $msg .= PHP_EOL . "\tPARAMS: " . json_encode($params);
+            $msg .= PHP_EOL."\tPARAMS: ".json_encode($params);
         }
         if ($types) {
-            $msg .= PHP_EOL . "\tTYPES: " . json_encode($types);
+            $msg .= PHP_EOL."\tTYPES: ".json_encode($types);
         }
         $this->debug($msg);
     }
@@ -46,7 +47,8 @@ class SqlLogger extends AbstractLogger implements LogInterface
      * @see \Doctrine\DBAL\Logging\SQLLogger::stopQuery()
      */
     public function stopQuery()
-    {}
+    {
+    }
 
     public function addLoggerTo($em)
     {

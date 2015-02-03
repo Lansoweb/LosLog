@@ -4,7 +4,6 @@ namespace LosLogTests\Log;
 
 class EntityLoggerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Prepares the environment before running a test.
      */
