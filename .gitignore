@@ -4,8 +4,6 @@
 /tests/TestConfiguration.php
 !*.gitadd
 !*.gitkeep
-.DS_Store
-Thumbs.db
 /vendor
 /composer.lock
 /build

@@ -19,6 +19,7 @@ use LosLog\Log\SqlLogger;
 use LosLog\Options\ModuleOptions;
 use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Module definition
@@ -46,12 +47,12 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             $eventManager = $e->getApplication()->getEventManager();
             $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR, [
                 $logger,
-                'dispatchError'
+                'dispatchError',
             ], - 100);
             $events = $e->getApplication()
                 ->getEventManager()
                 ->getSharedManager();
-            $events->attach('*', 'save.invalid', function ($e) use ($sm, $logger) {
+            $events->attach('*', 'save.invalid', function ($e) use ($logger) {
                 $form = $e->getParam('form');
                 $logger->crit('Erro salvando form: '.print_r($form->getMessages(), true));
             });
@@ -68,30 +69,30 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
     {
         return [
             'factories' => [
-                'loslog_options' => function ($sm) {
+                'loslog_options' => function (ServiceLocatorInterface $sm) {
                     $config = $sm->get('Configuration');
 
                     return new ModuleOptions(isset($config['loslog']) ? $config['loslog'] : []);
                 },
-                'LosLog\Log\EntityLogger' => function ($sm) {
+                'LosLog\Log\EntityLogger' => function (ServiceLocatorInterface $sm) {
                     $config = $sm->get('loslog_options');
                     $logger = new EntityLogger($config->getEntityLoggerFile(), $config->getLogDir());
 
                     return $logger;
                 },
-                'LosLog\Log\ErrorLogger' => function ($sm) {
+                'LosLog\Log\ErrorLogger' => function (ServiceLocatorInterface $sm) {
                     $config = $sm->get('loslog_options');
                     $logger = new ErrorLogger($config->getErrorLoggerFile(), $config->getLogDir());
 
                     return $logger;
                 },
-                'LosLog\Log\SqlLogger' => function ($sm) {
+                'LosLog\Log\SqlLogger' => function (ServiceLocatorInterface $sm) {
                     $config = $sm->get('loslog_options');
                     $logger = new SqlLogger($config->getSqlLoggerFile(), $config->getLogDir());
 
                     return $logger;
                 },
-                'LosLog\Log\StaticLogger' => function ($sm) {
+                'LosLog\Log\StaticLogger' => function (ServiceLocatorInterface $sm) {
                     $config = $sm->get('loslog_options');
                     $logger = StaticLogger::getInstance($config->getStaticLoggerFile(), $config->getLogDir());
 
@@ -103,7 +104,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
                 'loslog_errorlogger' => 'LosLog\Log\ErrorLogger',
                 'loslog_sqllogger' => 'LosLog\Log\SqlLogger',
                 'loslog_staticlogger' => 'LosLog\Log\StaticLogger',
-            ]
+            ],
         ];
     }
 
@@ -117,7 +118,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__.'/src/'.__NAMESPACE__,
                 ],
-            ]
+            ],
         ];
     }
 

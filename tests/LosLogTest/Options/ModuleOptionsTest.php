@@ -108,45 +108,45 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEntityLoggerFile()
     {
-        $this->assertSame('entity.log',$this->ModuleOptions->getEntityLoggerFile());
+        $this->assertSame('entity.log', $this->ModuleOptions->getEntityLoggerFile());
     }
 
     public function testSetEntityLoggerFile()
     {
         $this->ModuleOptions->setEntityLoggerFile('new.log');
-        $this->assertSame('new.log',$this->ModuleOptions->getEntityLoggerFile());
+        $this->assertSame('new.log', $this->ModuleOptions->getEntityLoggerFile());
     }
 
     public function testGetSqlLoggerFile()
     {
-        $this->assertSame('sql.log',$this->ModuleOptions->getSqlLoggerFile());
+        $this->assertSame('sql.log', $this->ModuleOptions->getSqlLoggerFile());
     }
 
     public function testSetSqlLoggerFile()
     {
         $this->ModuleOptions->setSqlLoggerFile('new.log');
-        $this->assertSame('new.log',$this->ModuleOptions->getSqlLoggerFile());
+        $this->assertSame('new.log', $this->ModuleOptions->getSqlLoggerFile());
     }
 
     public function testGetErrorLoggerFile()
     {
-        $this->assertSame('error.log',$this->ModuleOptions->getErrorLoggerFile());
+        $this->assertSame('error.log', $this->ModuleOptions->getErrorLoggerFile());
     }
 
     public function testSetErrorLoggerFile()
     {
         $this->ModuleOptions->setErrorLoggerFile('new.log');
-        $this->assertSame('new.log',$this->ModuleOptions->getErrorLoggerFile());
+        $this->assertSame('new.log', $this->ModuleOptions->getErrorLoggerFile());
     }
 
     public function testGetStaticLoggerFile()
     {
-        $this->assertSame('static.log',$this->ModuleOptions->getStaticLoggerFile());
+        $this->assertSame('static.log', $this->ModuleOptions->getStaticLoggerFile());
     }
 
     public function testSetStaticLoggerFile()
     {
         $this->ModuleOptions->setStaticLoggerFile('new.log');
-        $this->assertSame('new.log',$this->ModuleOptions->getStaticLoggerFile());
+        $this->assertSame('new.log', $this->ModuleOptions->getStaticLoggerFile());
     }
 }

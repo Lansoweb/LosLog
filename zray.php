@@ -1,7 +1,7 @@
 <?php
 namespace LosLog;
 
-class zray
+class LosZray
 {
     public function storeLog($context, &$storage)
     {
@@ -12,7 +12,7 @@ class zray
     }
 }
 
-$losStorage = new LosZray();
+$losStorage = new \LosLog\LosZray();
 $loslog = new \ZRayExtension("loslog");
 $loslog->setMetadata(array(
     'logo' => __DIR__.DIRECTORY_SEPARATOR.'logo.png',

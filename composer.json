@@ -26,7 +26,7 @@
         "doctrine/doctrine-module" : "doctrine-module if you want to use the SqlLogger",
         "doctrine/doctrine-orm-module" : "doctrine-orm-module if you want to use the EntityLogger"
     },
-    "license" : "BSD-3",
+    "license" : "BSD-3-Clause",
     "type" : "library",
     "homepage" : "http://github.com/Lansoweb/LosLog"
 }

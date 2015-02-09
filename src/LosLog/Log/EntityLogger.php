@@ -33,7 +33,7 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'onFlush'
+            'onFlush',
         ];
     }
 
@@ -74,10 +74,6 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
 
             $this->debug('Deleting entity '.get_class($entity).$add.'.');
         }
-
-        //TODO
-        //foreach ($uow->getScheduledCollectionDeletions() as $col) {}
-        //foreach ($uow->getScheduledCollectionUpdates() as $col) {}
     }
 
     public static function dump($entity, $maxDepth = 1, $toHtml = true)

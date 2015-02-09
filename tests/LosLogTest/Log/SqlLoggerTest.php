@@ -22,7 +22,7 @@ class SqlLoggerTest extends \PHPUnit_Framework_TestCase
     {
         //$this->markTestIncomplete('This test has not been implemented yet.');
 
-        $this->logger->startQuery('testSqlLogger',['param1'=>'param2'],['type1'=>'type2']);
+        $this->logger->startQuery('testSqlLogger', ['param1' => 'param2'], ['type1' => 'type2']);
 
         $log = file_get_contents('data/logs/sql.log');
 
@@ -31,12 +31,12 @@ class SqlLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testAddLoggerTo()
     {
-        $em= $this->getMockBuilder('EntityManager')
+        $em = $this->getMockBuilder('EntityManager')
             ->setMethods(array('getConfiguration'))
             ->getMock();
 
         $sqlLogger = $this->getMockBuilder('EntityManagerConfig')
-            ->setMethods(array('getSQLLogger','setSQLLogger'))
+            ->setMethods(array('getSQLLogger', 'setSQLLogger'))
             ->getMock();
 
         $sqlLogger->expects($this->once())

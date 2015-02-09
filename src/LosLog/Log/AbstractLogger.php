@@ -52,7 +52,7 @@ abstract class AbstractLogger extends Logger
     {
         parent::__construct();
 
-        if (null == $logDir) {
+        if (null === $logDir) {
             $logDir = sys_get_temp_dir();
         }
         $this->setLogDir($logDir);

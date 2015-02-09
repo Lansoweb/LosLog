@@ -112,20 +112,11 @@ class ErrorLogger extends AbstractLogger
         }
 
         set_exception_handler(
-                function ($exception) use ($logger) {
                     /* var $exception Exception */
-                    $extra = [
-                            'file' => $exception->getFile(),
-                            'line' => $exception->getLine(),
-                            'trace' => $exception->getTrace(),
-                    ];
-                    if (isset($exception->xdebug_message)) {
-                        $extra['xdebug'] = $exception->xdebug_message;
-                    }
-
+            function (\Exception $exception) use ($logger) {
                     $msg = '';
                     $prev = $exception->getPrevious();
-                    while ($prev != null) {
+                    while ($prev !== null) {
                         $msg .= PHP_EOL.'Previous: '.$prev->getMessage().
                                  ' in '.$prev->getFile().' in line '.
                                  $prev->getLine().'.';
@@ -176,7 +167,7 @@ class ErrorLogger extends AbstractLogger
                 }
                 $msg = '';
                 $prev = $exception->getPrevious();
-                while ($prev != null) {
+                while ($prev !== null) {
                     $msg .= PHP_EOL.'Previous: '.$prev->getMessage().' in '.
                              $prev->getFile().' in line '.$prev->getLine().
                              '.';
