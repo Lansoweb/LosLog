@@ -1,5 +1,5 @@
 # LosLog
-[![Build Status](https://travis-ci.org/Lansoweb/LosLog.svg?branch=master)](https://travis-ci.org/Lansoweb/LosLog) [![Latest Stable Version](https://poser.pugx.org/los/loslog/v/stable.svg)](https://packagist.org/packages/los/loslog) [![Total Downloads](https://poser.pugx.org/los/loslog/downloads.svg)](https://packagist.org/packages/los/loslog) [![Coverage Status](https://coveralls.io/repos/Lansoweb/LosLog/badge.svg)](https://coveralls.io/r/Lansoweb/LosLog)
+[![Build Status](https://travis-ci.org/Lansoweb/LosLog.svg?branch=master)](https://travis-ci.org/Lansoweb/LosLog) [![Latest Stable Version](https://poser.pugx.org/los/loslog/v/stable.svg)](https://packagist.org/packages/los/loslog) [![Total Downloads](https://poser.pugx.org/los/loslog/downloads.svg)](https://packagist.org/packages/los/loslog) [![Coverage Status](https://coveralls.io/repos/Lansoweb/LosLog/badge.svg)](https://coveralls.io/r/Lansoweb/LosLog) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lansoweb/LosLog/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lansoweb/LosLog/?branch=master)
 
 ## Introduction
 This module provides some useful log classes:

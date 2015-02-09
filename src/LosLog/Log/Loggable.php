@@ -30,6 +30,7 @@ trait Loggable
      */
     public function losLogMe()
     {
+        $ret = [];
         $ret[get_class($this)] = [];
         foreach (get_object_vars($this) as $name => $content) {
             if (!is_object($content)) {

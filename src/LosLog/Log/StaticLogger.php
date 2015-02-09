@@ -34,7 +34,7 @@ class StaticLogger extends AbstractLogger
      * Saves a message to a logfile
      *
      * @param mixed  $message
-     * @param string $filename
+     * @param string $logFile
      * @param string $logDir
      */
     public static function save($message, $logFile = 'static.log', $logDir = 'data/logs')

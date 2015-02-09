@@ -29,7 +29,8 @@ class ErrorLogger extends AbstractLogger
     /**
      * Registers an error handler for PHP errors
      *
-     * @param  LosLog\Log\ErrorLogger             $logger
+     * @param  Logger                             $logger
+     * @param  boolean                            $continueNativeHandler
      * @return boolean                            Returna always false to enable other handlers, including the default
      * @throws Exception\InvalidArgumentException if logger is null
      */
@@ -60,7 +61,7 @@ class ErrorLogger extends AbstractLogger
         ];
 
         $previous = set_error_handler(
-                function ($errno, $errstr, $errfile, $errline, $errcontext) use (
+                function ($errno, $errstr, $errfile, $errline) use (
                 $errorHandlerMap, $logger, $continueNativeHandler) {
                     $errorLevel = error_reporting();
 
@@ -95,7 +96,7 @@ class ErrorLogger extends AbstractLogger
     /**
      * Registers an exception handler
      *
-     * @param  LosLog\Log\ErrorLogger             $logger
+     * @param  Logger                             $logger
      * @return boolean                            Returna always false to enable other handlers, including the default
      * @throws Exception\InvalidArgumentException if logger is null
      */
@@ -199,7 +200,8 @@ class ErrorLogger extends AbstractLogger
     /**
      * Registers the handlers for errors and exceptions
      *
-     * @param string $arq
+     * @param string $logFile
+     * @param string $logDir
      */
     public static function registerHandlers($logFile = 'error.log', $logDir = 'data/logs')
     {
