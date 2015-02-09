@@ -88,7 +88,7 @@ abstract class AbstractLogger extends Logger
         $this->_logDir = $logDir;
     }
     /**
-     * @return the $_logFile
+     * @return string $_logFile
      */
     public function getLogFile()
     {
@@ -96,7 +96,7 @@ abstract class AbstractLogger extends Logger
     }
 
     /**
-     * @param string $_logFile
+     * @param string $logFile
      */
     public function setLogFile($logFile)
     {
