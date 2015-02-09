@@ -23,23 +23,5 @@ namespace LosLog\Log;
  */
 class LoggableObject
 {
-    /**
-     * Function to collect properties values
-     *
-     * @return array Array contendo as propriedades do object e seus valores
-     */
-    public function losLogMe()
-    {
-        $ret = [];
-        $ret[get_class($this)] = [];
-        foreach (get_object_vars($this) as $name => $content) {
-            if (!is_object($content)) {
-                $ret[$name] = ['type' => gettype($content), 'content' => $content];
-            } else {
-                $ret[$name] = ['type' => gettype($content), 'class' => get_class($content)];
-            }
-        }
-
-        return $ret;
-    }
+    use Loggable;
 }
