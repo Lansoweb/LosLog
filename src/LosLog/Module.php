@@ -20,6 +20,8 @@ use LosLog\Options\ModuleOptions;
 use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use LosLog\Log\RollbarLogger;
+use RollbarNotifier;
 
 /**
  * Module definition
@@ -39,9 +41,9 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
     public function onBootstrap($e)
     {
         $sm = $e->getApplication()->getServiceManager();
-        $config = $sm->get('loslog_options');
+        $options = $sm->get('loslog_options');
 
-        if ($config->getUseErrorLogger()) {
+        if ($options->getUseErrorLogger()) {
             $logger = $sm->get('LosLog\Log\ErrorLogger');
 
             $eventManager = $e->getApplication()->getEventManager();
@@ -51,10 +53,30 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             ], - 100);
         }
 
-        if ($config->getUseSqlLogger()) {
+        if ($options->getUseSqlLogger()) {
             $em = $sm->get('doctrine.entitymanager.orm_default');
             $sqlLogger = $sm->get('LosLog\Log\SqlLogger');
             $sqlLogger->addLoggerTo($em);
+        }
+
+        if ($options->getUseRollbarLogger()) {
+            $rollbar = $sm->get('RollbarNotifier');
+            if ($options->getExceptionhandler()) {
+                set_exception_handler(array($rollbar, "report_exception"));
+                $eventManager = $e->getApplication()->getEventManager();
+                $eventManager->attach('dispatch.error', function($event) use ($rollbar) {
+                    $exception = $event->getResult()->exception;
+                    if ($exception) {
+                        $rollbar->report_exception($exception);
+                    }
+                });
+            }
+            if ($options->getErrorhandler()) {
+                set_error_handler(array($rollbar, "report_php_error"));
+            }
+            if ($options->getShutdownfunction()) {
+                register_shutdown_function( $this->shutdownHandler($rollbar));
+            }
         }
     }
 
@@ -91,14 +113,50 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 
                     return $logger;
                 },
+                'LosLog\Log\RollbarLogger' => function (ServiceLocatorInterface $sm) {
+                    $config = $sm->get('loslog_options');
+                    $logger = new RollbarLogger($sm->get('RollbarNotifier'));
+
+                    return $logger;
+                },
+                'RollbarNotifier'  => function (ServiceLocatorInterface $sm) {
+                    $config = $sm->get('loslog_options');
+                    $vet = $config->toArray();
+                    $vet['agent_log_location'] = $config->getAgentLogLocation();
+                    $logger = new RollbarNotifier($vet);
+
+                    return $logger;
+                },
             ],
             'aliases' => [
                 'loslog_entitylogger' => 'LosLog\Log\EntityLogger',
                 'loslog_errorlogger' => 'LosLog\Log\ErrorLogger',
                 'loslog_sqllogger' => 'LosLog\Log\SqlLogger',
                 'loslog_staticlogger' => 'LosLog\Log\StaticLogger',
+                'loslog_rollbarlogger' => 'LosLog\Log\RollbarLogger',
             ],
         ];
+    }
+
+    protected function shutdownHandler($rollbar)
+    {
+        return function () use ($rollbar) {
+            // Catch any fatal errors that are causing the shutdown
+            $last_error = error_get_last();
+            if (!is_null($last_error)) {
+                //switch ($last_error['type']) {
+                    //case E_ERROR:
+                        $rollbar->report_php_error(
+                        $last_error['type'],
+                        $last_error['message'],
+                        $last_error['file'],
+                        $last_error['line']
+                        );
+                        //break;
+                //}
+            }
+            $rollbar->flush();
+        };
     }
 
     public function getAutoloaderConfig()
