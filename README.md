@@ -4,10 +4,11 @@
 ## Introduction
 This module provides some useful log classes:
 
-- ErrorLogger  = PHP error and Exception
-- EntityLogger = Doctrine ORM Entity
-- SqlLogger    = Doctrine DBAL SQL
-- StaticLogger = "Shortcut" to a generic file logger. Can be attached to the Z-Ray in Zend Server (NEW)
+- ErrorLogger   = PHP error and Exception
+- EntityLogger  = Doctrine ORM Entity
+- SqlLogger     = Doctrine DBAL SQL
+- StaticLogger  = "Shortcut" to a generic file logger. Can be attached to the Z-Ray in Zend Server
+- RollbarLogger = Rollbar logger. Uploads errors and exceptions to [Rollbar](https://rollbar.com) service (NEW) 
 
 ## Requirements
 This module only requires zendframework 2 [framework.zend.com](http://framework.zend.com/).
