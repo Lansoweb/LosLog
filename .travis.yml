@@ -13,6 +13,7 @@ php:
 before_install:
   - wget http://get.sensiolabs.org/php-cs-fixer.phar
   - composer self-update
+  - composer require --dev --no-update doctrine/dbal
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
