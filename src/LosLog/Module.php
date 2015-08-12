@@ -1,12 +1,13 @@
 <?php
 
 /**
- * Module definition
+ * Module definition.
  *
- * @package   LosLog
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
@@ -24,19 +25,20 @@ use LosLog\Log\RollbarLogger;
 use RollbarNotifier;
 
 /**
- * Module definition
+ * Module definition.
  *
- * @package LosLog
  * @author Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link http://leandrosilva.info Development Blog
  * @link http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license http://leandrosilva.info/licenca-bsd New BSD license
  */
 class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 {
     /**
-     * Module bootstrap
+     * Module bootstrap.
      */
     public function onBootstrap($e)
     {
@@ -50,7 +52,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR, [
                 $logger,
                 'dispatchError',
-            ], - 100);
+            ], -100);
         }
 
         if ($options->getUseSqlLogger()) {
@@ -62,9 +64,9 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
         if ($options->getUseRollbarLogger()) {
             $rollbar = $sm->get('RollbarNotifier');
             if ($options->getExceptionhandler()) {
-                set_exception_handler(array($rollbar, "report_exception"));
+                set_exception_handler(array($rollbar, 'report_exception'));
                 $eventManager = $e->getApplication()->getEventManager();
-                $eventManager->attach('dispatch.error', function($event) use ($rollbar) {
+                $eventManager->attach('dispatch.error', function ($event) use ($rollbar) {
                     $exception = $event->getResult()->exception;
                     if ($exception) {
                         $rollbar->report_exception($exception);
@@ -72,10 +74,10 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
                 });
             }
             if ($options->getErrorhandler()) {
-                set_error_handler(array($rollbar, "report_php_error"));
+                set_error_handler(array($rollbar, 'report_php_error'));
             }
             if ($options->getShutdownfunction()) {
-                register_shutdown_function( $this->shutdownHandler($rollbar));
+                register_shutdown_function($this->shutdownHandler($rollbar));
             }
         }
     }
@@ -119,7 +121,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
 
                     return $logger;
                 },
-                'RollbarNotifier'  => function (ServiceLocatorInterface $sm) {
+                'RollbarNotifier' => function (ServiceLocatorInterface $sm) {
                     $config = $sm->get('loslog_options');
                     $vet = $config->toArray();
                     $vet['agent_log_location'] = $config->getAgentLogLocation();

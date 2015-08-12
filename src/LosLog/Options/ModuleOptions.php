@@ -1,11 +1,13 @@
 <?php
+
 /**
- * Module options
+ * Module options.
  *
- * @package   LosLog\Options
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
@@ -14,200 +16,182 @@ namespace LosLog\Options;
 use Zend\Stdlib\AbstractOptions;
 
 /**
- * Module options
+ * Module options.
  *
- * @package LosLog\Options
  * @author Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link http://leandrosilva.info Development Blog
  * @link http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license http://leandrosilva.info/licenca-bsd New BSD license
  */
 class ModuleOptions extends AbstractOptions
 {
-
     /**
-     * Rollbar API url
+     * Rollbar API url.
      *
      * @var string
      */
     const API_URL = 'https://api.rollbar.com/api/1/';
 
     /**
-     * Default log directory
+     * Default log directory.
      *
      * @var string
      */
     protected $logDir = 'data/logs';
 
     /**
-     * Use EntityLogger
+     * Use EntityLogger.
      *
      * @var bool Default is false
      */
     protected $useEntityLogger = false;
 
     /**
-     * Log filename for the EntityLogger
+     * Log filename for the EntityLogger.
      *
      * @var string
      */
     protected $entityLoggerFile = 'entity.log';
 
     /**
-     * Use SqlLogger
+     * Use SqlLogger.
      *
      * @var bool Default is false
      */
     protected $useSqlLogger = false;
 
     /**
-     * Log filename for the SqlLogger
+     * Log filename for the SqlLogger.
      *
      * @var string
      */
     protected $sqlLoggerFile = 'sql.log';
 
     /**
-     * Use ErrorLogger
+     * Use ErrorLogger.
      *
      * @var bool Default is false
      */
     protected $useErrorLogger = false;
 
     /**
-     * Log filename for the ErrorLogger
+     * Log filename for the ErrorLogger.
      *
      * @var string
      */
     protected $errorLoggerFile = 'error.log';
 
     /**
-     * Log filename for the StaticLogger
+     * Log filename for the StaticLogger.
      *
      * @var string
      */
     protected $staticLoggerFile = 'static.log';
 
     /**
-     * Rollbar Section
+     * Rollbar Section.
      */
     /**
-     *
      * @var bool Enabled module or not
      */
     protected $useRollbarLogger = false;
 
     /**
-     *
      * @var string server-side access token
      */
     protected $accessToken = '';
 
     /**
-     *
      * @var string client-side access token
      */
     protected $clientAccessToken = '';
 
     /**
-     *
      * @var string The rollbar api url (defaults to 'https://api.rollbar.com/api/1/')
      */
     protected $baseApiUrl = self::API_URL;
 
     /**
-     *
      * @var int Flush batch early if it reaches this size. default: 50
      */
     protected $batchSize = 50;
 
     /**
-     *
      * @var bool True to batch all reports from a single request together. default true.
      */
     protected $batched = false;
 
     /**
-     *
      * @var string Name of the current branch (default 'master')
      */
     protected $branch = 'master';
 
     /**
-     *
      * @var bool record full stacktraces for PHP errors. default: true
      */
     protected $captureErrorBacktraces = true;
 
     /**
-     *
      * @var string Environment name, e.g. 'production' or 'development'. default: 'production'
      */
     protected $environment = 'production';
 
     /**
-     *
      * @var array Associative array mapping error numbers to sample rates
      */
     protected $errorSampleRates = [];
 
     /**
-     *
      * @var string Either "blocking" (default) or "agent". "blocking" uses curl to send
-     *      requests immediately; "agent" writes a relay log to be consumed by rollbar-agent.
+     *             requests immediately; "agent" writes a relay log to be consumed by rollbar-agent.
      */
-    protected $handler = "blocking";
+    protected $handler = 'blocking';
 
     /**
-     *
      * @var string Path to the directory where agent relay log files should be written. default 'data/logs'
      */
     protected $agentLogLocation = 'data/logs';
 
     /**
-     *
      * @var string Server hostname. Default: null, which will result in a call to `gethostname()`)
      */
     protected $host;
 
     /**
-     *
-     * @var object An object that has a log($level, $message) method
+     * @var object An object that has a log($level,) method
      */
     protected $logger;
 
     /**
-     *
      * @var int Max PHP error number to report. e.g. 1024 will ignore all errors
-     *      above E_USER_NOTICE. default: 1024 (ignore E_STRICT and above)
+     *          above E_USER_NOTICE. default: 1024 (ignore E_STRICT and above)
      */
     protected $maxErrno = 1024;
 
     /**
-     *
      * @var array An associative array containing data about the currently-logged in user.
-     *      Required: 'id', optional: 'username', 'email'. All values are strings.
+     *            Required: 'id', optional: 'username', 'email'. All values are strings.
+     *
      * @todo Replace array by object
      */
     protected $person = [];
 
     /**
-     *
      * @var a callable Function reference (string, etc. - anything that
-     *      [call_user_func()](http://php.net/call_user_func) can handle) returning
-     *      an array like the one for 'person'
+     *        [call_user_func()](http://php.net/call_user_func) can handle) returning
+     *        an array like the one for 'person'
      */
     protected $personFn;
 
     /**
-     *
      * @var string Path to your project's root dir
      */
     protected $root;
 
     /**
-     *
      * @var array Array of field names to scrub out of POST
      *
      *      Values will be replaced with astrickses. If overridiing, make sure to list all fields you want to scrub,
@@ -220,46 +204,40 @@ class ModuleOptions extends AbstractOptions
         'password',
         'secret',
         'confirm_password',
-        'password_confirmation'
+        'password_confirmation',
     ];
 
     /**
-     *
      * @var bool Whether to shift function names in stack traces down one frame, so that the
-     *      function name correctly reflects the context of each frame. default: true.
+     *           function name correctly reflects the context of each frame. default: true.
      */
     protected $shiftFunction;
 
     /**
-     *
      * @var int Request timeout for posting to rollbar, in seconds. default 3
      */
     protected $timeout = 3;
 
     /**
-     *
      * @var bool Register Rollbar as an exception handler to log PHP exceptions
      */
     protected $exceptionhandler;
 
     /**
-     *
      * @var bool Register Rollbar as an error handler to log PHP errors
      */
     protected $errorhandler;
 
     /**
-     *
      * @var bool Register Rollbar as an shutdown function
      */
     protected $shutdownfunction;
 
     /**
-     * End Rollbar Section
+     * End Rollbar Section.
      */
 
     /**
-     *
      * @return the $logDir
      */
     public function getLogDir()
@@ -268,24 +246,22 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @param string $logDir
      */
     public function setLogDir($logDir)
     {
         $logDir = trim($logDir);
-        if (! file_exists($logDir)) {
-            throw new \InvalidArgumentException("Directory does not exist!");
+        if (!file_exists($logDir)) {
+            throw new \InvalidArgumentException('Directory does not exist!');
         }
-        if (! is_writable($logDir)) {
-            throw new \InvalidArgumentException("Directory not writable!");
+        if (!is_writable($logDir)) {
+            throw new \InvalidArgumentException('Directory not writable!');
         }
 
         $this->logDir = $logDir;
     }
 
     /**
-     *
      * @return the $useEntityLogger
      */
     public function getUseEntityLogger()
@@ -294,8 +270,7 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
-     * @param boolean $useEntityLogger
+     * @param bool $useEntityLogger
      */
     public function setUseEntityLogger($useEntityLogger)
     {
@@ -303,7 +278,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @return the $useSqlLogger
      */
     public function getUseSqlLogger()
@@ -312,8 +286,7 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
-     * @param boolean $useSqlLogger
+     * @param bool $useSqlLogger
      */
     public function setUseSqlLogger($useSqlLogger)
     {
@@ -321,7 +294,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @return the $entityLoggerFile
      */
     public function getEntityLoggerFile()
@@ -330,7 +302,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @param string $entityLoggerFile
      */
     public function setEntityLoggerFile($entityLoggerFile)
@@ -339,7 +310,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @return the $sqlLoggerFile
      */
     public function getSqlLoggerFile()
@@ -348,7 +318,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @param string $sqlLoggerFile
      */
     public function setSqlLoggerFile($sqlLoggerFile)
@@ -357,7 +326,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @return the $useErrorLogger
      */
     public function getUseErrorLogger()
@@ -366,8 +334,7 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
-     * @param boolean $useErrorLogger
+     * @param bool $useErrorLogger
      */
     public function setUseErrorLogger($useErrorLogger)
     {
@@ -375,7 +342,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @return the $errorLoggerFile
      */
     public function getErrorLoggerFile()
@@ -384,7 +350,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @param string $errorLoggerFile
      */
     public function setErrorLoggerFile($errorLoggerFile)
@@ -393,7 +358,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @return the $staticLoggerFile
      */
     public function getStaticLoggerFile()
@@ -402,7 +366,6 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
-     *
      * @param string $staticLoggerFile
      */
     public function setStaticLoggerFile($staticLoggerFile)
@@ -418,6 +381,7 @@ class ModuleOptions extends AbstractOptions
     public function setUseRollbarLogger($useRollbarLogger)
     {
         $this->useRollbarLogger = $useRollbarLogger;
+
         return $this;
     }
 
@@ -429,6 +393,7 @@ class ModuleOptions extends AbstractOptions
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
+
         return $this;
     }
 
@@ -440,6 +405,7 @@ class ModuleOptions extends AbstractOptions
     public function setClientAccessToken($clientAccessToken)
     {
         $this->clientAccessToken = $clientAccessToken;
+
         return $this;
     }
 
@@ -451,6 +417,7 @@ class ModuleOptions extends AbstractOptions
     public function setBaseApiUrl($baseApiUrl)
     {
         $this->baseApiUrl = $baseApiUrl;
+
         return $this;
     }
 
@@ -462,6 +429,7 @@ class ModuleOptions extends AbstractOptions
     public function setBatchSize($batchSize)
     {
         $this->batchSize = $batchSize;
+
         return $this;
     }
 
@@ -473,6 +441,7 @@ class ModuleOptions extends AbstractOptions
     public function setBatched($batched)
     {
         $this->batched = $batched;
+
         return $this;
     }
 
@@ -484,6 +453,7 @@ class ModuleOptions extends AbstractOptions
     public function setBranch($branch)
     {
         $this->branch = $branch;
+
         return $this;
     }
 
@@ -495,6 +465,7 @@ class ModuleOptions extends AbstractOptions
     public function setCaptureErrorBacktraces($captureErrorBacktraces)
     {
         $this->captureErrorBacktraces = $captureErrorBacktraces;
+
         return $this;
     }
 
@@ -506,6 +477,7 @@ class ModuleOptions extends AbstractOptions
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
+
         return $this;
     }
 
@@ -517,6 +489,7 @@ class ModuleOptions extends AbstractOptions
     public function setErrorSampleRates($errorSampleRates)
     {
         $this->errorSampleRates = $errorSampleRates;
+
         return $this;
     }
 
@@ -528,6 +501,7 @@ class ModuleOptions extends AbstractOptions
     public function setHandler($handler)
     {
         $this->handler = $handler;
+
         return $this;
     }
 
@@ -543,6 +517,7 @@ class ModuleOptions extends AbstractOptions
     public function setAgentLogLocation($agentLogLocation)
     {
         $this->agentLogLocation = $agentLogLocation;
+
         return $this;
     }
 
@@ -554,6 +529,7 @@ class ModuleOptions extends AbstractOptions
     public function setHost($host)
     {
         $this->host = $host;
+
         return $this;
     }
 
@@ -565,6 +541,7 @@ class ModuleOptions extends AbstractOptions
     public function setLogger($logger)
     {
         $this->logger = $logger;
+
         return $this;
     }
 
@@ -576,6 +553,7 @@ class ModuleOptions extends AbstractOptions
     public function setMaxErrno($maxErrno)
     {
         $this->maxErrno = $maxErrno;
+
         return $this;
     }
 
@@ -587,6 +565,7 @@ class ModuleOptions extends AbstractOptions
     public function setPerson($person)
     {
         $this->person = $person;
+
         return $this;
     }
 
@@ -598,6 +577,7 @@ class ModuleOptions extends AbstractOptions
     public function setPersonFn($personFn)
     {
         $this->personFn = $personFn;
+
         return $this;
     }
 
@@ -609,6 +589,7 @@ class ModuleOptions extends AbstractOptions
     public function setRoot($root)
     {
         $this->root = $root;
+
         return $this;
     }
 
@@ -620,6 +601,7 @@ class ModuleOptions extends AbstractOptions
     public function setScrubFields($scrubFields)
     {
         $this->scrubFields = $scrubFields;
+
         return $this;
     }
 
@@ -631,6 +613,7 @@ class ModuleOptions extends AbstractOptions
     public function setShiftFunction($shiftFunction)
     {
         $this->shiftFunction = $shiftFunction;
+
         return $this;
     }
 
@@ -642,6 +625,7 @@ class ModuleOptions extends AbstractOptions
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+
         return $this;
     }
 
@@ -653,6 +637,7 @@ class ModuleOptions extends AbstractOptions
     public function setExceptionhandler($exceptionhandler)
     {
         $this->exceptionhandler = $exceptionhandler;
+
         return $this;
     }
 
@@ -664,6 +649,7 @@ class ModuleOptions extends AbstractOptions
     public function setErrorhandler($errorhandler)
     {
         $this->errorhandler = $errorhandler;
+
         return $this;
     }
 
@@ -675,6 +661,7 @@ class ModuleOptions extends AbstractOptions
     public function setShutdownfunction($shutdownfunction)
     {
         $this->shutdownfunction = $shutdownfunction;
+
         return $this;
     }
 }

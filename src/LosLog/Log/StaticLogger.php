@@ -1,37 +1,40 @@
 <?php
+
 /**
- * Development logger
+ * Development logger.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 namespace LosLog\Log;
 
 /**
- * Development logger
+ * Development logger.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 class StaticLogger extends AbstractLogger
 {
     /**
-     * Logger instance
+     * Logger instance.
      *
      * @var \LosLog\Log\StaticLogger
      */
     protected static $instance;
 
     /**
-     * Saves a message to a logfile
+     * Saves a message to a logfile.
      *
      * @param mixed  $message
      * @param string $logFile
@@ -51,15 +54,16 @@ class StaticLogger extends AbstractLogger
     }
 
     /**
-     * Gets an instance of this logger and sets the log directory and filename
+     * Gets an instance of this logger and sets the log directory and filename.
      *
-     * @param  string                   $logFile
-     * @param  string                   $logDir
+     * @param string $logFile
+     * @param string $logDir
+     *
      * @return \LosLog\Log\StaticLogger
      */
     public static function getInstance($logFile = 'static.log', $logDir = 'data/logs')
     {
-        if (static::$instance instanceof StaticLogger) {
+        if (static::$instance instanceof self) {
             return static::$instance;
         }
         static::$instance = new self($logFile, $logDir);

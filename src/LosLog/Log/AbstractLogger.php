@@ -1,11 +1,13 @@
 <?php
+
 /**
- * Abstract class for Loggers
+ * Abstract class for Loggers.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
@@ -15,33 +17,34 @@ use Zend\Log\Writer\Stream;
 use Zend\Log\Logger;
 
 /**
- * Abstract class for Loggers
+ * Abstract class for Loggers.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
 abstract class AbstractLogger extends Logger
 {
     /**
-     * Log directory
+     * Log directory.
      *
      * @var string
      */
     private $_logDir;
 
     /**
-     * Log file
+     * Log file.
      *
      * @var string
      */
     private $_logFile;
 
     /**
-     * Construtor
+     * Construtor.
      *
      * Sets the logDir, logFile and thr writer. If the logDir is null, the system's temp dir will be used
      *
@@ -63,7 +66,7 @@ abstract class AbstractLogger extends Logger
     }
 
     /**
-     * Returns the log dir
+     * Returns the log dir.
      *
      * @return string
      */
@@ -73,16 +76,17 @@ abstract class AbstractLogger extends Logger
     }
 
     /**
-     * Setter for log dir
+     * Setter for log dir.
      *
-     * @param  string                    $logDir
+     * @param string $logDir
+     *
      * @throws \InvalidArgumentException
      */
     public function setLogDir($logDir)
     {
         $logDir = trim($logDir);
         if (!file_exists($logDir) || !is_writable($logDir)) {
-            throw new \InvalidArgumentException("Invalid log directory!");
+            throw new \InvalidArgumentException('Invalid log directory!');
         }
 
         $this->_logDir = $logDir;
@@ -102,7 +106,7 @@ abstract class AbstractLogger extends Logger
     {
         $logFile = trim($logFile);
         if (null === $logFile || '' == $logFile) {
-            throw new \InvalidArgumentException("Invalid log directory!");
+            throw new \InvalidArgumentException('Invalid log directory!');
         }
         $this->_logFile = $logFile;
     }

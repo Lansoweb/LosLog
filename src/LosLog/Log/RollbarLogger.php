@@ -1,4 +1,5 @@
 <?php
+
 namespace LosLog\Log;
 
 use DateTime;
@@ -11,12 +12,12 @@ use Zend\Log\Writer\AbstractWriter;
 class RollbarLogger extends AbstractWriter
 {
     /**
-     * \RollbarNotifier
+     * \RollbarNotifier.
      */
     protected $rollbar;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @params \RollbarNotifier $rollbar
      */
@@ -28,7 +29,8 @@ class RollbarLogger extends AbstractWriter
     /**
      * This writer does not support formatting.
      *
-     * @param  string|FormatterInterface $formatter
+     * @param string|FormatterInterface $formatter
+     *
      * @return WriterInterface
      */
     public function setFormatter($formatter)
@@ -39,15 +41,14 @@ class RollbarLogger extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param  array $event Event data
-     * @return void
+     * @param array $event Event data
      */
     protected function doWrite(array $event)
     {
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
             $event['timestamp'] = $event['timestamp']->format(DateTime::W3C);
         }
-        $extra = array_diff_key($event, array('message'=>'', 'priorityName' => '', 'priority' => 0));
+        $extra = array_diff_key($event, array('message' => '', 'priorityName' => '', 'priority' => 0));
 
         $this->rollbar->report_message($event['message'], $event['priorityName'], $extra);
     }

@@ -1,8 +1,8 @@
 <?php
+
 /**
- * Tests for ModuleOptions
+ * Tests for ModuleOptions.
  *
- * @package    LosLosTests\Options
  * @author     Leandro Silva <lansoweb@hotmail.com>
  * @copyright  2011-2012 Leandro Silva
  */
@@ -16,7 +16,6 @@ use LosLog\Options\ModuleOptions;
 class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var ModuleOptions
      */
     private $ModuleOptions;

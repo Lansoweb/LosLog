@@ -1,11 +1,13 @@
 <?php
+
 /**
- * Logs all entity operations in the database
+ * Logs all entity operations in the database.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
@@ -16,12 +18,13 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\Common\Util\Debug;
 
 /**
- * Logs all entity operations in the database
+ * Logs all entity operations in the database.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
@@ -38,7 +41,7 @@ class EntityLogger extends AbstractLogger implements EventSubscriber
     }
 
     /**
-     * Logs the entity changes
+     * Logs the entity changes.
      *
      * @param \Doctrine\ORM\Event\OnFlushEventArgs $eventArgs
      */

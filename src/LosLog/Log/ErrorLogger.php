@@ -1,11 +1,13 @@
 <?php
+
 /**
- * Logs errors and exceptions
+ * Logs errors and exceptions.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
@@ -14,12 +16,13 @@ namespace LosLog\Log;
 use Zend\Log\Logger;
 
 /**
- * Logs errors and exceptions
+ * Logs errors and exceptions.
  *
- * @package   LosLog\Log
  * @author    Leandro Silva <leandro@leandrosilva.info>
+ *
  * @link      http://leandrosilva.info Development Blog
  * @link      http://github.com/LansoWeb/LosLog for the canonical source repository
+ *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  * @codeCoverageIgnore
@@ -27,11 +30,13 @@ use Zend\Log\Logger;
 class ErrorLogger extends AbstractLogger
 {
     /**
-     * Registers an error handler for PHP errors
+     * Registers an error handler for PHP errors.
      *
-     * @param  Logger                             $logger
-     * @param  boolean                            $continueNativeHandler
-     * @return boolean                            Returna always false to enable other handlers, including the default
+     * @param Logger $logger
+     * @param bool   $continueNativeHandler
+     *
+     * @return bool Returna always false to enable other handlers, including the default
+     *
      * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerErrorHandler(Logger $logger, $continueNativeHandler = false)
@@ -94,10 +99,12 @@ class ErrorLogger extends AbstractLogger
     }
 
     /**
-     * Registers an exception handler
+     * Registers an exception handler.
      *
-     * @param  Logger                             $logger
-     * @return boolean                            Returna always false to enable other handlers, including the default
+     * @param Logger $logger
+     *
+     * @return bool Returna always false to enable other handlers, including the default
+     *
      * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerExceptionHandler(Logger $logger)
@@ -135,7 +142,7 @@ class ErrorLogger extends AbstractLogger
     }
 
     /**
-     * Logs any dispatch exceptions
+     * Logs any dispatch exceptions.
      *
      * @param \Zend\Mvc\MvcEvent $e
      */
@@ -173,7 +180,7 @@ class ErrorLogger extends AbstractLogger
                              '.';
                     $prev = $prev->getPrevious();
                 }
-                $this->log(ErrorLogger::ERR,
+                $this->log(self::ERR,
                         'Dispatch: '.$exception->getMessage().' in '.
                                  $exception->getFile().' in line '.
                                  $exception->getLine().'.'.$msg.PHP_EOL.
@@ -181,7 +188,7 @@ class ErrorLogger extends AbstractLogger
                                  $exception->getTraceAsString());
                 break;
             default:
-                $this->log(ErrorLogger::ERR,
+                $this->log(self::ERR,
                 'Erro desconhecido no dispatch: '.$error);
                 break;
 
@@ -189,7 +196,7 @@ class ErrorLogger extends AbstractLogger
     }
 
     /**
-     * Registers the handlers for errors and exceptions
+     * Registers the handlers for errors and exceptions.
      *
      * @param string $logFile
      * @param string $logDir
