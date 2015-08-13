@@ -3,10 +3,16 @@
     "description" : "LosLog provides some log utility your ZF2 application",
     "require" : {
         "php" : ">=5.4.0",
-        "zendframework/zendframework" : ">=2.3.2,<3.0.0"
+        "zendframework/zend-log" : ">=2.3.2,<3.0.0",
+        "zendframework/zend-stdlib" : ">=2.3.2,<3.0.0",
+        "zendframework/zend-modulemanager" : ">=2.3.2,<3.0.0",
+        "zendframework/zend-loader" : ">=2.3.2,<3.0.0",
+        "zendframework/zend-servicemanager" : ">=2.3.2,<3.0.0",
+        "zendframework/zend-mvc" : ">=2.3.2,<3.0.0"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "dev-master"
+        "satooshi/php-coveralls": "dev-master",
+        "doctrine/dbal": "dev-master"
     },
     "authors" : [ 
         {
