@@ -174,8 +174,6 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var array An associative array containing data about the currently-logged in user.
      *            Required: 'id', optional: 'username', 'email'. All values are strings.
-     *
-     * @todo Replace array by object
      */
     protected $person = [];
 

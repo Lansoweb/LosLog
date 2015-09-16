@@ -23,6 +23,7 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use LosLog\Log\RollbarLogger;
 use RollbarNotifier;
+use Zend\EventManager\Event;
 
 /**
  * Module definition.
@@ -66,7 +67,7 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             if ($options->getExceptionhandler()) {
                 set_exception_handler(array($rollbar, 'report_exception'));
                 $eventManager = $e->getApplication()->getEventManager();
-                $eventManager->attach('dispatch.error', function ($event) use ($rollbar) {
+                $eventManager->attach('dispatch.error', function (Event $event) use ($rollbar) {
                     $exception = $event->getResult()->exception;
                     if ($exception) {
                         $rollbar->report_exception($exception);
@@ -116,7 +117,6 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
                     return $logger;
                 },
                 'LosLog\Log\RollbarLogger' => function (ServiceLocatorInterface $sm) {
-                    $config = $sm->get('loslog_options');
                     $logger = new RollbarLogger($sm->get('RollbarNotifier'));
 
                     return $logger;
@@ -146,16 +146,12 @@ class Module implements AutoloaderProviderInterface, LocatorRegisteredInterface
             // Catch any fatal errors that are causing the shutdown
             $last_error = error_get_last();
             if (!is_null($last_error)) {
-                //switch ($last_error['type']) {
-                    //case E_ERROR:
-                        $rollbar->report_php_error(
-                        $last_error['type'],
-                        $last_error['message'],
-                        $last_error['file'],
-                        $last_error['line']
-                        );
-                        //break;
-                //}
+                $rollbar->report_php_error(
+                    $last_error['type'],
+                    $last_error['message'],
+                    $last_error['file'],
+                    $last_error['line']
+                );
             }
             $rollbar->flush();
         };
