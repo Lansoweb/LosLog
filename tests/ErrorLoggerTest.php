@@ -1,4 +1,5 @@
 <?php
+
 namespace LosMiddleware\LosLog;
 
 use Zend\Log\Logger;

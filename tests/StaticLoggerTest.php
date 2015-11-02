@@ -1,13 +1,16 @@
 <?php
+
 namespace LosMiddleware\LosLog;
 
 use org\bovigo\vfs\vfsStream;
 
-class IncompleteTest {
+class IncompleteTest
+{
     public $prop = 1;
 }
 
-class Test {
+class Test
+{
     use Loggable;
 
     public $prop = 2;

@@ -1,4 +1,5 @@
 <?php
+
 namespace LosMiddleware\LosLog;
 
 use org\bovigo\vfs\vfsStream;

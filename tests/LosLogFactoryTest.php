@@ -1,4 +1,5 @@
 <?php
+
 namespace LosMiddleware\LosLog;
 
 use Zend\ServiceManager\ServiceManager;
