@@ -1,4 +1,5 @@
 <?php
+
 namespace LosMiddleware\LosLog;
 
 /**
@@ -34,5 +35,4 @@ class LoggableTest extends \PHPUnit_Framework_TestCase
     public function testLosLogMe()
     {
     }
-
 }

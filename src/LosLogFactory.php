@@ -3,6 +3,7 @@
 namespace LosMiddleware\LosLog;
 
 use Interop\Container\ContainerInterface;
+
 class LosLogFactory
 {
     public function __invoke(ContainerInterface $container)

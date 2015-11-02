@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./vendor/autoload.php" colors="true" backupGlobals="false">
+<phpunit bootstrap="./vendor/autoload.php" 
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         syntaxCheck="true"
+         backupGlobals="true"
+         backupStaticAttributes="false">
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true" processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
