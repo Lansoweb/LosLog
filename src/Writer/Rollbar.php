@@ -1,6 +1,6 @@
 <?php
 
-namespace LosLog\Log;
+namespace LosMiddleware\LosLog\Writer;
 
 use DateTime;
 use RollbarNotifier;
@@ -9,7 +9,7 @@ use Zend\Log\Writer\AbstractWriter;
 /**
  * Rollbar log writer.
  */
-class RollbarLogger extends AbstractWriter
+class Rollbar extends AbstractWriter
 {
     /**
      * \RollbarNotifier.
