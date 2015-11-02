@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Trait for loggable objects.
+ * Logs errors and exceptions.
  *
  * @author    Leandro Silva <leandro@leandrosilva.info>
  *
@@ -11,10 +11,12 @@
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
  */
-namespace LosLog\Log;
+namespace LosMiddleware\LosLog;
+
+use Zend\Log\Logger;
 
 /**
- * Trait for loggable objects.
+ * Logs errors and exceptions.
  *
  * @author    Leandro Silva <leandro@leandrosilva.info>
  *
@@ -23,26 +25,20 @@ namespace LosLog\Log;
  *
  * @copyright Copyright (c) 2011-2013 Leandro Silva (http://leandrosilva.info)
  * @license   http://leandrosilva.info/licenca-bsd New BSD license
+ * @codeCoverageIgnore
  */
-trait Loggable
+class ExceptionLogger
 {
     /**
-     * Function to collect properties values.
+     * Registers the handlers for errors and exceptions.
      *
-     * @return array Array contendo as propriedades do object e seus valores
+     * @param string $logFile
+     * @param string $logDir
      */
-    public function losLogMe()
+    public static function registerHandlers($logFile = 'exception.log', $logDir = 'data/logs')
     {
-        $ret = [];
-        $ret[get_class($this)] = [];
-        foreach (get_object_vars($this) as $name => $content) {
-            if (!is_object($content)) {
-                $ret[$name] = ['type' => gettype($content), 'content' => $content];
-            } else {
-                $ret[$name] = ['type' => gettype($content), 'class' => get_class($content)];
-            }
-        }
+        $logger = AbstractLogger::generateFileLogger($logFile, $logDir);
 
-        return $ret;
+        Logger::registerExceptionHandler($logger->getLogger());
     }
 }

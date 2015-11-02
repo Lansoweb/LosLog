@@ -1,5 +1,5 @@
 <?php
-namespace LosLog;
+namespace LosMiddleware;
 
 class LosZray
 {
@@ -12,10 +12,10 @@ class LosZray
     }
 }
 
-$losStorage = new \LosLog\LosZray();
+$losStorage = new \LosMiddleware\LosZray();
 $loslog = new \ZRayExtension("loslog");
 $loslog->setMetadata(array(
     'logo' => __DIR__.DIRECTORY_SEPARATOR.'logo.png',
 ));
 $loslog->setEnabledAfter('Zend\Mvc\Application::init');
-$loslog->traceFunction("LosLog\\Log\\StaticLogger::save",  array($losStorage, 'storeLog'), function () {});
+$loslog->traceFunction("LosMiddleware\\LosLog\\StaticLogger::save",  array($losStorage, 'storeLog'), function () {});
