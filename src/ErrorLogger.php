@@ -35,11 +35,11 @@ class ErrorLogger extends AbstractLogger
      * @param string $logFile
      * @param string $logDir
      */
-    public static function registerHandlers($logFile = 'error.log', $logDir = 'data/logs')
+    public static function registerHandlers($logFile = 'error.log', $logDir = 'data/logs', $continue = true)
     {
         $logger = AbstractLogger::generateFileLogger($logFile, $logDir);
 
-        Logger::registerErrorHandler($logger->getLogger(), true);
+        Logger::registerErrorHandler($logger->getLogger(), $continue);
         Logger::registerFatalErrorShutdownFunction($logger->getLogger());
     }
 }

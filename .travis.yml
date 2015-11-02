@@ -11,7 +11,7 @@ install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
   
 script:
-  - (cd tests ; phpunit -c phpunit.xml)
+  - (phpunit -c phpunit.xml)
   - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then php php-cs-fixer.phar fix -v --diff --dry-run ; fi
 
 after_script:

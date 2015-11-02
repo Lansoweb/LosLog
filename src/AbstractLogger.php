@@ -19,6 +19,11 @@ abstract class AbstractLogger
 
     public static function validateLogFile($logFile, $logDir)
     {
+        // Is logFile a stream url?
+        if (strpos($logFile, '://') !== false) {
+            return $logFile;
+        }
+
         if (!file_exists($logDir) || !is_writable($logDir)) {
             throw new Exception\InvalidArgumentException("Log dir {$logDir} must exist and be writable!");
         }
