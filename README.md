@@ -7,6 +7,7 @@ This is the 2.0 documentation version. Please refer to the README-1.0 for 1.0 do
 This module provides some useful log classes:
 
 - LosLog = An error middleware for PSR-7 compatible frameworks/applications
+- HttpLog = Use to log request and response from a PSR-7 application
 - ErrorLogger = PHP error
 - ExceptionLogger = PHP Exception
 - StaticLogger = "Shortcut" to a generic file logger. Can be attached to the Z-Ray in Zend Server
@@ -55,6 +56,28 @@ return [
 If using other framework, you can add the LosLogFactory to your factory system, manually create a LosLog instance or 
 call the LosLogFactory directly. 
  
+### HttpLog Middleware
+
+#### Zend Expressive
+Add the middleware as the first middleware in your pipeline, like:
+```php
+return [
+    'middleware_pipeline' => [
+        'pre_routing' => [
+            [ 'middleware' => LosMiddleware\LosLog\HttpLog::class, ]
+        ],
+        'post_routing' => [
+        ],
+    ],
+];
+```
+
+Set the desired options in loslog.global.php (or loslog.local.php):
+```php
+'http_logger_file' => 'http.log',
+'log_request' => true,
+'log_response' => true,
+``` 
 
 ### ErrorLogger
 To enable the ErrorLogger just add the registerHandlers inside your public/index.php

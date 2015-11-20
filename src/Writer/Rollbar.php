@@ -48,7 +48,7 @@ class Rollbar extends AbstractWriter
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
             $event['timestamp'] = $event['timestamp']->format(DateTime::W3C);
         }
-        $extra = array_diff_key($event, array('message' => '', 'priorityName' => '', 'priority' => 0));
+        $extra = array_diff_key($event, ['message' => '', 'priorityName' => '', 'priority' => 0]);
 
         $this->rollbar->report_message($event['message'], $event['priorityName'], $extra);
     }

@@ -54,8 +54,9 @@ class RollbarTest extends \PHPUnit_Framework_TestCase
         ];
 
         $method = new \ReflectionMethod(
-            'LosMiddleware\LosLog\Writer\Rollbar', 'doWrite'
-            );
+            'LosMiddleware\LosLog\Writer\Rollbar',
+            'doWrite'
+        );
 
         $method->setAccessible(true);
 
