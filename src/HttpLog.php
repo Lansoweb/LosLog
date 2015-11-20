@@ -22,7 +22,50 @@ class HttpLog implements MiddlewareInterface
             'level' => LogLevel::INFO,
             'log_request' => true,
             'log_response' => true,
+            'full' => false,
         ], $options);
+    }
+
+    private function generateRequestLog(Request $request)
+    {
+        if ($this->options['full']) {
+            return RequestSerializer::toString($request);
+        }
+
+        $msg = sprintf(
+            "%s %s",
+            $request->getMethod(),
+            $request->getRequestTarget()
+            );
+
+        if ($request->hasHeader('X-Request-Id')) {
+            $msg .= ' RequestId: '. $request->getHeader('X-Request-Id')[0];
+        }
+
+        return $msg;
+    }
+
+    private function generateResponseLog(Response $response)
+    {
+        if ($this->options['full']) {
+            return ResponseSerializer::toString($response);
+        }
+
+        $reasonPhrase = $response->getReasonPhrase();
+        $msg = sprintf(
+            "%s %s",
+            $response->getStatusCode(),
+            ($reasonPhrase ? $reasonPhrase : '')
+        );
+
+        if ($response->hasHeader('X-Request-Id')) {
+            $msg .= ' RequestId: '. $response->getHeader('X-Request-Id')[0];
+        }
+        if ($response->hasHeader('X-Response-Time')) {
+            $msg .= ' ResponseTime: '. $response->getHeader('X-Response-Time')[0];
+        }
+
+        return $msg;
     }
 
     public function __invoke(Request $request, Response $response, callable $next = null)
@@ -32,12 +75,12 @@ class HttpLog implements MiddlewareInterface
         }
 
         if ($this->options['log_request']) {
-            $requestMessage = RequestSerializer::toString($request);
+            $requestMessage = $this->generateRequestLog($request);
             $this->logger->log($this->options['level'], sprintf("Request: %s", $requestMessage));
         }
 
         if ($this->options['log_response']) {
-            $responseMessage = ResponseSerializer::toString($response);
+            $responseMessage = $this->generateResponseLog($response);
             $this->logger->log($this->options['level'], sprintf("Response: %s", $responseMessage));
         }
 

@@ -14,6 +14,7 @@ return [
         'http_logger_file' => 'http.log',
         'log_request' => false,
         'log_response' => false,
+        'full' => false,
     ],
 ];
 

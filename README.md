@@ -58,6 +58,8 @@ call the LosLogFactory directly.
  
 ### HttpLog Middleware
 
+It will log requests and responses in compact or full mode. It will include X-Request-Id and X-Response-Time headers if present.
+ 
 #### Zend Expressive
 Add the middleware as the first middleware in your pipeline, like:
 ```php
@@ -77,7 +79,34 @@ Set the desired options in loslog.global.php (or loslog.local.php):
 'http_logger_file' => 'http.log',
 'log_request' => true,
 'log_response' => true,
+'full' => false,
 ``` 
+
+You can integrate with [los/request-id](https://github.com/Lansoweb/request-id) and [los/response-time](https://github.com/Lansoweb/response-time).
+The order is important, use as bellow:
+
+```php
+return [
+    'middleware_pipeline' => [
+        'pre_routing' => [
+            [ 'middleware' => LosMiddleware\RequestId\RequestId::class ],
+            [ 'middleware' => LosMiddleware\LosLog\HttpLog::class ],
+            [ 'middleware' => LosMiddleware\ResponseTime\ResponseTime::class ],
+            //other middlewares
+        ],
+        'post_routing' => [
+            //other middlewares
+            [ 'middleware' => LosMiddleware\RequestId\RequestId::class ],
+        ],
+    ],
+];
+```
+
+This will produce:
+```
+2015-11-20T14:04:51+00:00 INFO (6): Request: GET /shop/v1/item/1 RequestId: 12dbf2d2-52c5-4954-b573-3aa2fee58612
+2015-11-20T14:04:51+00:00 INFO (6): Response: 200 OK RequestId: 12dbf2d2-52c5-4954-b573-3aa2fee58612 ResponseTime: 14.90ms
+```
 
 ### ErrorLogger
 To enable the ErrorLogger just add the registerHandlers inside your public/index.php
