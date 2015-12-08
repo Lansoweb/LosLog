@@ -26,7 +26,7 @@ class HttpLog implements MiddlewareInterface
         ], $options);
     }
 
-    private function generateRequestLog(Request $request)
+    private function generateRequestLog(Request $request, Response $response)
     {
         if ($this->options['full']) {
             return RequestSerializer::toString($request);
@@ -40,12 +40,14 @@ class HttpLog implements MiddlewareInterface
 
         if ($request->hasHeader('X-Request-Id')) {
             $msg .= ' RequestId: '. $request->getHeader('X-Request-Id')[0];
+        } elseif ($response->hasHeader('X-Request-Id')) {
+            $msg .= ' RequestId: '. $response->getHeader('X-Request-Id')[0];
         }
 
         return $msg;
     }
 
-    private function generateResponseLog(Response $response)
+    private function generateResponseLog(Request $request, Response $response)
     {
         if ($this->options['full']) {
             return ResponseSerializer::toString($response);
@@ -60,6 +62,8 @@ class HttpLog implements MiddlewareInterface
 
         if ($response->hasHeader('X-Request-Id')) {
             $msg .= ' RequestId: '. $response->getHeader('X-Request-Id')[0];
+        } elseif ($request->hasHeader('X-Request-Id')) {
+            $msg .= ' RequestId: '. $request->getHeader('X-Request-Id')[0];
         }
         if ($response->hasHeader('X-Response-Time')) {
             $msg .= ' ResponseTime: '. $response->getHeader('X-Response-Time')[0];
@@ -75,12 +79,12 @@ class HttpLog implements MiddlewareInterface
         }
 
         if ($this->options['log_request']) {
-            $requestMessage = $this->generateRequestLog($request);
+            $requestMessage = $this->generateRequestLog($request, $response);
             $this->logger->log($this->options['level'], sprintf("Request: %s", $requestMessage));
         }
 
         if ($this->options['log_response']) {
-            $responseMessage = $this->generateResponseLog($response);
+            $responseMessage = $this->generateResponseLog($request, $response);
             $this->logger->log($this->options['level'], sprintf("Response: %s", $responseMessage));
         }
 
