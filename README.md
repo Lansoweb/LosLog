@@ -11,7 +11,7 @@ This module provides some useful log classes:
 - ErrorLogger = PHP error
 - ExceptionLogger = PHP Exception
 - StaticLogger = "Shortcut" to a generic file logger. Can be attached to the Z-Ray in Zend Server
-- Rollbar writer = A Rollbar writer. Uploads errors and exceptions to [Rollbar](https://rollbar.com) service 
+- Rollbar writer = A Rollbar writer. Uploads errors and exceptions to [Rollbar](https://rollbar.com) service
 
 ## Requirements
 
@@ -29,7 +29,7 @@ php composer.phar require los/loslog
 ```
 
 ## Usage
-Copy the file loslog.global.php.dist to your config/autoload/ , rename it to 
+Copy the file loslog.global.php.dist to your config/autoload/ , rename it to
 loslog.global.php and change the default options, if needed.
 
 ### LosLog Middleware
@@ -39,36 +39,34 @@ Add the middleware to your pipeline, like:
 ```php
 return [
     'middleware_pipeline' => [
-        'pre_routing' => [
-        ],
-
-        'post_routing' => [
-            [
-                'middleware' => LosMiddleware\LosLog\LosLog::class,
-                'error' => true,
+        'error' => [
+            'middleware' => [
+                LosMiddleware\LosLog\LosLog::class,
             ],
+            'priority' => -10000,
         ],
     ],
 ];
 ```
 
 #### General use
-If using other framework, you can add the LosLogFactory to your factory system, manually create a LosLog instance or 
-call the LosLogFactory directly. 
- 
+If using other framework, you can add the LosLogFactory to your factory system, manually create a LosLog instance or
+call the LosLogFactory directly.
+
 ### HttpLog Middleware
 
 It will log requests and responses in compact or full mode. It will include X-Request-Id and X-Response-Time headers if present.
- 
+
 #### Zend Expressive
 Add the middleware as the first middleware in your pipeline, like:
 ```php
 return [
     'middleware_pipeline' => [
-        'pre_routing' => [
-            [ 'middleware' => LosMiddleware\LosLog\HttpLog::class, ]
-        ],
-        'post_routing' => [
+        'before' => [
+            'middleware' => [
+                LosMiddleware\LosLog\HttpLog::class,
+            ],
+            'priority' => 10000,
         ],
     ],
 ];
@@ -80,7 +78,7 @@ Set the desired options in loslog.global.php (or loslog.local.php):
 'log_request' => true,
 'log_response' => true,
 'full' => false,
-``` 
+```
 
 You can integrate with [los/request-id](https://github.com/Lansoweb/request-id) and [los/response-time](https://github.com/Lansoweb/response-time).
 The order is important, use as bellow:
@@ -88,15 +86,19 @@ The order is important, use as bellow:
 ```php
 return [
     'middleware_pipeline' => [
-        'pre_routing' => [
-            [ 'middleware' => LosMiddleware\RequestId\RequestId::class ],
-            [ 'middleware' => LosMiddleware\LosLog\HttpLog::class ],
-            [ 'middleware' => LosMiddleware\ResponseTime\ResponseTime::class ],
-            //other middlewares
+        'before' => [
+            'middleware' => [
+                LosMiddleware\RequestId\RequestId::class,
+                LosMiddleware\LosLog\HttpLog::class,
+                LosMiddleware\ResponseTime\ResponseTime::class
+            ],
+            'priority' => 10000,
         ],
-        'post_routing' => [
-            //other middlewares
-            [ 'middleware' => LosMiddleware\RequestId\RequestId::class ],
+        'after' => [
+            'middleware' => [
+                LosMiddleware\RequestId\RequestId::class,
+            ],
+            'priority' => -10000,
         ],
     ],
 ];
@@ -111,7 +113,7 @@ This will produce:
 ### ErrorLogger
 To enable the ErrorLogger just add the registerHandlers inside your public/index.php
 
-#### Zend Framework 2 
+#### Zend Framework 2
 ```php
 chdir(dirname(__DIR__));
 
@@ -153,7 +155,7 @@ The default logfile is data/log/error.log
 ### ExceptionLogger
 To enable the ExceptionLogger just add the registerHandlers inside your public/index.php
 
-#### Zend Framework 2 
+#### Zend Framework 2
 ```php
 chdir(dirname(__DIR__));
 
@@ -198,7 +200,7 @@ Trace:
 #9 <dir>/public/index.php(23): Zend\Mvc\Application::init(Array)
 #10 {main}
 ```
- 
+
 The default logfile is data/log/exception.log
 
 ### StaticLogger
