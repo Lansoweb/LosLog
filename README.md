@@ -39,10 +39,9 @@ Add the middleware to your pipeline, like:
 ```php
 return [
     'middleware_pipeline' => [
-        'after' => [
+        'error' => [
             'middleware' => [
                 LosMiddleware\LosLog\LosLog::class,
-                'error' => true,
             ],
             'priority' => -10000,
         ],
