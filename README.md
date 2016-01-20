@@ -43,6 +43,7 @@ return [
             'middleware' => [
                 LosMiddleware\LosLog\LosLog::class,
             ],
+            'error'    => true,
             'priority' => -10000,
         ],
     ],
