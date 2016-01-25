@@ -23,7 +23,7 @@ class LosLog implements ErrorMiddlewareInterface
         }
 
         if ($next !== null) {
-            return $next($request, $response);
+            return $next($request, $response, $error);
         }
 
         return $response;
