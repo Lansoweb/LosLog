@@ -1,10 +1,17 @@
 <?php
+use Zend\Stratigility\Middleware\ErrorHandler;
+
 return [
     'dependencies' => [
         'factories' => [
             LosMiddleware\LosLog\LosLog::class => LosMiddleware\LosLog\LosLogFactory::class,
             LosMiddleware\LosLog\HttpLog::class => LosMiddleware\LosLog\HttpLogFactory::class,
         ],
+        'delegators' => [
+      		ErrorHandler;::class => [
+            	LosMiddleware\LosLog\ErrorHandlerListenerDelegatorFactory::class,
+        	],
+    	],
     ],
     'loslog' => [
         'log_dir' => 'data/logs',

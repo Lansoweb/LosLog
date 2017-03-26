@@ -35,17 +35,21 @@ loslog.global.php and change the default options, if needed.
 ### LosLog Middleware
 
 #### Zend Expressive
-Add the middleware to your pipeline, like:
+Expressive 2.0 introduced a new method to handle errors, using listeners to the ErrorHandler and delegator factories, 
+so this is the preferable method.
+
+Add the delegator factory to the ErrorHandler, like:
 ```php
 return [
-    'middleware_pipeline' => [
-        'error' => [
-            'middleware' => [
-                LosMiddleware\LosLog\LosLog::class,
-            ],
-            'error'    => true,
-            'priority' => -10000,
+    'dependencies' => [
+        'factories' => [
+            LosMiddleware\LosLog\LosLog::class => LosMiddleware\LosLog\LosLogFactory::class,
         ],
+        'delegators' => [
+      		ErrorHandler;::class => [
+            	LosMiddleware\LosLog\ErrorHandlerListenerDelegatorFactory::class,
+        	],
+    	],
     ],
 ];
 ```
@@ -94,12 +98,6 @@ return [
                 LosMiddleware\ResponseTime\ResponseTime::class
             ],
             'priority' => 10000,
-        ],
-        'after' => [
-            'middleware' => [
-                LosMiddleware\RequestId\RequestId::class,
-            ],
-            'priority' => -10000,
         ],
     ],
 ];
