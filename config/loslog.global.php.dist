@@ -6,9 +6,10 @@ return [
         'factories' => [
             LosMiddleware\LosLog\LosLog::class => LosMiddleware\LosLog\LosLogFactory::class,
             LosMiddleware\LosLog\HttpLog::class => LosMiddleware\LosLog\HttpLogFactory::class,
+            Psr\Log\LoggerInterface::class => LosMiddleware\LosLog\LoggerFactory::class,
         ],
         'delegators' => [
-      		ErrorHandler;::class => [
+      		ErrorHandler::class => [
             	LosMiddleware\LosLog\ErrorHandlerListenerDelegatorFactory::class,
         	],
     	],
