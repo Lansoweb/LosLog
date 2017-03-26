@@ -1,12 +1,15 @@
 <?php
-
 namespace LosMiddleware\LosLog;
 
 use Interop\Container\ContainerInterface;
 
 class LosLogFactory
 {
-    public function __invoke(ContainerInterface $container)
+    /**
+     * {@inheritDoc}
+     * @see \Zend\ServiceManager\Factory\FactoryInterface::__invoke()
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $config = $container->get('config');
         $losConfig = array_key_exists('loslog', $config) ? $config['loslog'] : [];

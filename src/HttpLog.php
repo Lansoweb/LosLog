@@ -36,7 +36,7 @@ class HttpLog implements MiddlewareInterface
             "%s %s",
             $request->getMethod(),
             $request->getRequestTarget()
-            );
+        );
 
         if ($request->hasHeader('X-Request-Id')) {
             $msg .= ' RequestId: '. $request->getHeader('X-Request-Id')[0];
@@ -74,14 +74,13 @@ class HttpLog implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        if ($next !== null) {
-            $response = $next($request, $response);
-        }
 
         if ($this->options['log_request']) {
             $requestMessage = $this->generateRequestLog($request, $response);
             $this->logger->log($this->options['level'], sprintf("Request: %s", $requestMessage));
         }
+
+        $response = $next($request, $response);
 
         if ($this->options['log_response']) {
             $responseMessage = $this->generateResponseLog($request, $response);
