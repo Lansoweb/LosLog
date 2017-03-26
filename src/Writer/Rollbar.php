@@ -1,6 +1,6 @@
 <?php
 
-namespace LosLog\Log;
+namespace LosMiddleware\LosLog\Writer;
 
 use DateTime;
 use RollbarNotifier;
@@ -9,7 +9,7 @@ use Zend\Log\Writer\AbstractWriter;
 /**
  * Rollbar log writer.
  */
-class RollbarLogger extends AbstractWriter
+class Rollbar extends AbstractWriter
 {
     /**
      * \RollbarNotifier.
@@ -48,7 +48,7 @@ class RollbarLogger extends AbstractWriter
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
             $event['timestamp'] = $event['timestamp']->format(DateTime::W3C);
         }
-        $extra = array_diff_key($event, array('message' => '', 'priorityName' => '', 'priority' => 0));
+        $extra = array_diff_key($event, ['message' => '', 'priorityName' => '', 'priority' => 0]);
 
         $this->rollbar->report_message($event['message'], $event['priorityName'], $extra);
     }
