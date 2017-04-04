@@ -20,7 +20,7 @@ class ErrorHandlerListenerDelegatorFactory implements DelegatorFactoryInterface
         $logger = $container->get(LoggerInterface::class);
 
         /* @var ErrorHandler $errorHandler */
-        $errorHandler = $callback;
+        $errorHandler = $callback();
         $errorHandler->attachListener(new LosLogListener($logger));
         return $errorHandler;
     }
