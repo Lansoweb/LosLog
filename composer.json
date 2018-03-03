@@ -2,7 +2,7 @@
   "name" : "los/loslog",
   "description" : "LosLog provides some log utility",
   "require" : {
-    "php" : "^5.6 || ^7.0 || ^7.1",
+    "php" : "^7.0",
     "psr/log" : "~1.0",
     "zendframework/zend-stratigility" : "^1.1 || ^2.0",
     "zendframework/zend-diactoros" : "^1.1",
