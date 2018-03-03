@@ -47,7 +47,7 @@ class AbstractLoggerTest extends TestCase
      */
     public function testValidateLogFileWithInvalidDir()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->object->validateLogFile('error.log', 'missing');
     }
 
