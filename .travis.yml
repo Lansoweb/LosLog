@@ -21,6 +21,4 @@ matrix:
   fast_finish: true
   include:
     - php: 7.1
-      env:
-        - EXECUTE_CS_CHECK=true
     - php: 7.2

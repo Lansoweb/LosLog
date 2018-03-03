@@ -19,7 +19,7 @@ class Rollbar extends AbstractWriter
      *
      * @return WriterInterface
      */
-    public function setFormatter($formatter)
+    public function setFormatter($formatter, ?array $options = NULL)
     {
         return $this;
     }
