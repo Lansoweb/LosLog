@@ -21,7 +21,7 @@ class RollbarTest extends TestCase
      */
     protected function setUp()
     {
-        $this->object = new Rollbar(new \RollbarNotifier([]));
+        $this->object = new Rollbar();
     }
 
     /**
