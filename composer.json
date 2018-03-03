@@ -4,7 +4,7 @@
   "require" : {
     "php" : "^7.0",
     "psr/log" : "~1.0",
-    "zendframework/zend-stratigility" : "^1.1 || ^2.0",
+    "zendframework/zend-stratigility" : "^3.0-dev",
     "zendframework/zend-diactoros" : "^1.1",
     "zendframework/zend-log" : "^2.6"
   },
