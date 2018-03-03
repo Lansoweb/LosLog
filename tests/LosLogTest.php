@@ -4,6 +4,7 @@ namespace LosMiddleware\LosLog;
 
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response;
 
@@ -23,11 +24,11 @@ class LosLogTest extends TestCase
      */
     protected function setUp()
     {
-        vfsStream::setup('home');
-        $file = vfsStream::url('home/static.log');
+        $this->root = vfsStream::setup('home');
+        $file       = vfsStream::url('home/static.log');
 
-        $logger = AbstractLogger::generateFileLogger($file, null);
-        $this->object = new LosLog($logger);
+        $this->logger = AbstractLogger::generateFileLogger($file, null);
+        $this->object = new LosLog($this->logger);
     }
 
     /**
@@ -40,30 +41,23 @@ class LosLogTest extends TestCase
 
     /**
      * @covers LosMiddleware\LosLog\LosLog::__construct
-     * @covers LosMiddleware\LosLog\LosLog::__invoke
+     * @covers LosMiddleware\LosLog\LosLog::process
      */
-    public function testInvoke()
+    public function testProcess()
     {
         $request = new ServerRequest();
-        $response = new Response();
+        $error   = new \Exception('Exception test!');
 
-        $error = new \Exception('Exception test!');
+        $handler = $this->prophesize(RequestHandlerInterface::class);
+        $handler->handle($request)->willThrow($error);
 
-        $this->object->__invoke($error, $request, $response);
-    }
+        try {
+            $this->object->process($request, $handler->reveal());
+        } catch (\Throwable $e) {
+            $this->assertInstanceOf(\Exception::class, $e);
+        }
 
-    /**
-     * @covers LosMiddleware\LosLog\LosLog::__invoke
-     */
-    public function testInvokeWithCallable()
-    {
-        $request = new ServerRequest();
-        $response = new Response();
-
-        $error = new \Exception('Exception test!');
-
-        $this->object->__invoke($error, $request, $response, function ($request, $response) {
-            return $response;
-        });
+        $log = $this->root->getChild('home/static.log')->getContent();
+        $this->assertNotFalse(strpos($log, 'Exception test!'));
     }
 }
