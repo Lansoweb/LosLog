@@ -2,11 +2,12 @@
 
 namespace LosMiddleware\LosLog;
 
+use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 use org\bovigo\vfs\vfsStream;
 
-class HttpLogFactoryTest extends \PHPUnit_Framework_TestCase
+class HttpLogFactoryTest extends TestCase
 {
     /**
      * @var HttpLogFactory

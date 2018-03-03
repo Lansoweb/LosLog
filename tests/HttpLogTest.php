@@ -3,10 +3,11 @@
 namespace LosMiddleware\LosLog;
 
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\TestCase;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response;
 
-class HttpLogTest extends \PHPUnit_Framework_TestCase
+class HttpLogTest extends TestCase
 {
     /**
      * @var LosLog
