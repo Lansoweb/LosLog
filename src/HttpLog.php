@@ -3,12 +3,15 @@
 namespace LosMiddleware\LosLog;
 
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Zend\Diactoros\Request\Serializer as RequestSerializer;
 use Zend\Diactoros\Response\Serializer as ResponseSerializer;
-use Zend\Stratigility\MiddlewareInterface;
+use Psr\Http\Server\MiddlewareInterface;
 
 class HttpLog implements MiddlewareInterface
 {
@@ -72,15 +75,14 @@ class HttpLog implements MiddlewareInterface
         return $msg;
     }
 
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $response = $handler->handle($request);
 
         if ($this->options['log_request']) {
             $requestMessage = $this->generateRequestLog($request, $response);
             $this->logger->log($this->options['level'], sprintf("Request: %s", $requestMessage));
         }
-
-        $response = $next($request, $response);
 
         if ($this->options['log_response']) {
             $responseMessage = $this->generateResponseLog($request, $response);

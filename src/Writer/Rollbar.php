@@ -3,6 +3,7 @@
 namespace LosMiddleware\LosLog\Writer;
 
 use DateTime;
+use Rollbar\Payload\Level;
 use RollbarNotifier;
 use Zend\Log\Writer\AbstractWriter;
 
@@ -12,28 +13,13 @@ use Zend\Log\Writer\AbstractWriter;
 class Rollbar extends AbstractWriter
 {
     /**
-     * \RollbarNotifier.
-     */
-    protected $rollbar;
-
-    /**
-     * Constructor.
-     *
-     * @params \RollbarNotifier $rollbar
-     */
-    public function __construct(RollbarNotifier $rollbar)
-    {
-        $this->rollbar = $rollbar;
-    }
-
-    /**
      * This writer does not support formatting.
      *
      * @param string|FormatterInterface $formatter
      *
      * @return WriterInterface
      */
-    public function setFormatter($formatter)
+    public function setFormatter($formatter, ?array $options = NULL)
     {
         return $this;
     }
@@ -45,11 +31,12 @@ class Rollbar extends AbstractWriter
      */
     protected function doWrite(array $event)
     {
+
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {
             $event['timestamp'] = $event['timestamp']->format(DateTime::W3C);
         }
         $extra = array_diff_key($event, ['message' => '', 'priorityName' => '', 'priority' => 0]);
 
-        $this->rollbar->report_message($event['message'], $event['priorityName'], $extra);
+        \Rollbar\Rollbar::log($event['priorityName'], $event['message'], $extra);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace LosMiddleware\LosLog;
 
+use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Config;
 use org\bovigo\vfs\vfsStream;
 
-class HttpLogFactoryTest extends \PHPUnit_Framework_TestCase
+class HttpLogFactoryTest extends TestCase
 {
     /**
      * @var HttpLogFactory
@@ -38,7 +38,7 @@ class HttpLogFactoryTest extends \PHPUnit_Framework_TestCase
         $root = vfsStream::setup('home');
         $file = vfsStream::url('home/static.log');
 
-        $container = new ServiceManager(new Config([]));
+        $container = new ServiceManager([]);
         $container->setService('config', [
             'loslog' => [
                 'log_dir' => 'home',
@@ -47,6 +47,6 @@ class HttpLogFactoryTest extends \PHPUnit_Framework_TestCase
                 'log_response' => true,
             ],
         ]);
-        $this->assertInstanceOf(HttpLog::class, $this->object->__invoke($container));
+        $this->assertInstanceOf(HttpLog::class, $this->object->__invoke($container, 'loslog'));
     }
 }

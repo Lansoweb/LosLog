@@ -2,16 +2,17 @@
   "name" : "los/loslog",
   "description" : "LosLog provides some log utility",
   "require" : {
-    "php" : "^5.6 || ^7.0 || ^7.1",
+    "php" : "^7.0",
     "psr/log" : "~1.0",
-    "zendframework/zend-stratigility" : "^1.1 || ^2.0",
+    "zendframework/zend-stratigility" : "^3.0-dev",
     "zendframework/zend-diactoros" : "^1.1",
     "zendframework/zend-log" : "^2.6"
   },
   "require-dev" : {
-    "satooshi/php-coveralls" : "dev-master",
+    "satooshi/php-coveralls" : "^2.0",
     "mikey179/vfsStream" : "^1.6",
-    "phpunit/phpunit" : "^5.0 || ^6.0"
+    "phpunit/phpunit" : "^7.0",
+    "rollbar/rollbar": "^1.4"
   },
   "license" : "BSD-3-Clause",
   "keywords" : [ "los", "log", "module", "zf2", "expressive" ],
