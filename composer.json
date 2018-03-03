@@ -11,7 +11,8 @@
   "require-dev" : {
     "satooshi/php-coveralls" : "^2.0",
     "mikey179/vfsStream" : "^1.6",
-    "phpunit/phpunit" : "^7.0"
+    "phpunit/phpunit" : "^7.0",
+    "rollbar/rollbar": "^1.4"
   },
   "license" : "BSD-3-Clause",
   "keywords" : [ "los", "log", "module", "zf2", "expressive" ],
