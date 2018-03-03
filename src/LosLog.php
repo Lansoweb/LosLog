@@ -2,12 +2,13 @@
 
 namespace LosMiddleware\LosLog;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use Zend\Stratigility\ErrorMiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-class LosLog implements ErrorMiddlewareInterface
+class LosLog implements MiddlewareInterface
 {
     private $logger;
 
@@ -16,16 +17,14 @@ class LosLog implements ErrorMiddlewareInterface
         $this->logger = $logger;
     }
 
-    public function __invoke($error, Request $request, Response $response, callable $next = null)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if ($error instanceof \Throwable) {
+        try {
+            return $handler->handle($request);
+        } catch (\Throwable $error) {
             $this->logger->error($error->getMessage() . '. File: ' . $error->getFile() . ':' . $error->getLine());
-        }
 
-        if ($next !== null) {
-            return $next($request, $response, $error);
+            throw $error;
         }
-
-        return $response;
     }
 }
