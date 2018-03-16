@@ -34,6 +34,7 @@ class ExceptionLogger
      *
      * @param string $logFile
      * @param string $logDir
+     * @throws Exception\InvalidArgumentException
      */
     public static function registerHandlers($logFile = 'exception.log', $logDir = 'data/logs')
     {

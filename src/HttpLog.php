@@ -18,6 +18,11 @@ class HttpLog implements MiddlewareInterface
     private $logger;
     private $options;
 
+    /**
+     * HttpLog constructor.
+     * @param LoggerInterface $logger
+     * @param array $options
+     */
     public function __construct(LoggerInterface $logger, $options = [])
     {
         $this->logger = $logger;
@@ -29,6 +34,11 @@ class HttpLog implements MiddlewareInterface
         ], $options);
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return string
+     */
     private function generateRequestLog(Request $request, Response $response)
     {
         if ($this->options['full']) {
@@ -50,6 +60,11 @@ class HttpLog implements MiddlewareInterface
         return $msg;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return string
+     */
     private function generateResponseLog(Request $request, Response $response)
     {
         if ($this->options['full']) {
@@ -75,6 +90,11 @@ class HttpLog implements MiddlewareInterface
         return $msg;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
