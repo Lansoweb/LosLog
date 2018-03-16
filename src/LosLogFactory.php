@@ -1,21 +1,26 @@
 <?php
 namespace LosMiddleware\LosLog;
 
-use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
-class LosLogFactory
+class LosLogFactory implements FactoryInterface
 {
     /**
-     * {@inheritDoc}
-     * @see \Zend\ServiceManager\Factory\FactoryInterface::__invoke()
+     * @param \Interop\Container\ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return LosLog|object
+     * @throws Exception\InvalidArgumentException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = null)
     {
         $config = $container->get('config');
-        $losConfig = array_key_exists('loslog', $config) ? $config['loslog'] : [];
+        $losConfig = $config['loslog'] ?? [];
 
-        $logDir = array_key_exists('log_dir', $losConfig) ? $losConfig['log_dir'] : 'data/logs';
-        $logFile = array_key_exists('error_logger_file', $losConfig) ? $losConfig['error_logger_file'] : 'error.log';
+        $logDir = $losConfig['log_dir'] ?? 'data/logs';
+        $logFile = $losConfig['error_logger_file'] ?? 'error.log';
 
         $logger = AbstractLogger::generateFileLogger($logFile, $logDir);
 

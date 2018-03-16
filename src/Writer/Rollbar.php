@@ -5,6 +5,7 @@ namespace LosMiddleware\LosLog\Writer;
 use DateTime;
 use Rollbar\Payload\Level;
 use RollbarNotifier;
+use Zend\Log\Formatter\FormatterInterface;
 use Zend\Log\Writer\AbstractWriter;
 
 /**
@@ -17,9 +18,10 @@ class Rollbar extends AbstractWriter
      *
      * @param string|FormatterInterface $formatter
      *
-     * @return WriterInterface
+     * @param array|null $options
+     * @return Rollbar
      */
-    public function setFormatter($formatter, ?array $options = NULL)
+    public function setFormatter($formatter, ?array $options = null)
     {
         return $this;
     }

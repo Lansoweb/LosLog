@@ -36,7 +36,7 @@ trait Loggable
         $ret = [];
         $ret[get_class($this)] = [];
         foreach (get_object_vars($this) as $name => $content) {
-            if (!is_object($content)) {
+            if (! is_object($content)) {
                 $ret[$name] = ['type' => gettype($content), 'content' => $content];
             } else {
                 $ret[$name] = ['type' => gettype($content), 'class' => get_class($content)];

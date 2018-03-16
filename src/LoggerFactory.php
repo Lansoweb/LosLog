@@ -10,8 +10,13 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 class LoggerFactory implements FactoryInterface
 {
     /**
-     * {@inheritDoc}
-     * @see \Zend\ServiceManager\Factory\FactoryInterface::__invoke()
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return object|PsrLoggerAdapter
+     * @throws Exception\InvalidArgumentException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
@@ -28,6 +33,12 @@ class LoggerFactory implements FactoryInterface
         return new PsrLoggerAdapter($zendLogLogger);
     }
 
+    /**
+     * @param string $logFile
+     * @param string $logDir
+     * @return string
+     * @throws Exception\InvalidArgumentException
+     */
     public static function validateLogFile($logFile, $logDir)
     {
         // Is logFile a stream url?
@@ -35,13 +46,13 @@ class LoggerFactory implements FactoryInterface
             return $logFile;
         }
 
-        if (!file_exists($logDir) || !is_writable($logDir)) {
+        if (! file_exists($logDir) || ! is_writable($logDir)) {
             throw new Exception\InvalidArgumentException("Log dir {$logDir} must exist and be writable!");
         }
 
         $fileName = $logDir.DIRECTORY_SEPARATOR.$logFile;
 
-        if (file_exists($fileName) && !is_writable($fileName)) {
+        if (file_exists($fileName) && ! is_writable($fileName)) {
             throw new Exception\InvalidArgumentException("Log file {$fileName} must be writable!");
         }
 

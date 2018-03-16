@@ -34,6 +34,8 @@ class ErrorLogger extends AbstractLogger
      *
      * @param string $logFile
      * @param string $logDir
+     * @param bool $continue
+     * @throws Exception\InvalidArgumentException
      */
     public static function registerHandlers($logFile = 'error.log', $logDir = 'data/logs', $continue = true)
     {
