@@ -5,13 +5,13 @@
     "php" : "^7.1",
     "psr/log" : "^1.0",
     "zendframework/zend-stratigility" : "^3.0",
-    "zendframework/zend-diactoros" : "^1.7",
+    "zendframework/zend-diactoros" : "^1.7 || ^2.0",
     "zendframework/zend-log" : "^2.9",
     "psr/container": "^1.0"
   },
   "require-dev" : {
     "satooshi/php-coveralls" : "^2.0",
-    "mikey179/vfsStream" : "^1.6",
+    "mikey179/vfsstream" : "^1.6",
     "phpunit/phpunit" : "^7.0",
     "rollbar/rollbar": "^1.4",
     "zendframework/zend-coding-standard": "^1.0",
