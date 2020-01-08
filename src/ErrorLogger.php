@@ -13,7 +13,7 @@
  */
 namespace LosMiddleware\LosLog;
 
-use Zend\Log\Logger;
+use Laminas\Log\Logger;
 
 /**
  * Logs errors and exceptions.

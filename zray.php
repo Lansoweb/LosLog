@@ -17,5 +17,5 @@ $loslog = new \ZRayExtension("loslog");
 $loslog->setMetadata(array(
     'logo' => __DIR__.DIRECTORY_SEPARATOR.'logo.png',
 ));
-$loslog->setEnabledAfter('Zend\Mvc\Application::init');
+$loslog->setEnabledAfter('Laminas\Mvc\Application::init');
 $loslog->traceFunction("LosMiddleware\\LosLog\\StaticLogger::save",  array($losStorage, 'storeLog'), function () {});

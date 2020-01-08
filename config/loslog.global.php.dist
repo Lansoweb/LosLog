@@ -1,5 +1,5 @@
 <?php
-use Zend\Stratigility\Middleware\ErrorHandler;
+use Laminas\Stratigility\Middleware\ErrorHandler;
 
 return [
     'dependencies' => [

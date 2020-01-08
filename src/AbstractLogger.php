@@ -2,9 +2,9 @@
 
 namespace LosMiddleware\LosLog;
 
-use Zend\Log\Logger;
-use Zend\Log\PsrLoggerAdapter;
-use Zend\Log\Writer\Stream;
+use Laminas\Log\Logger;
+use Laminas\Log\PsrLoggerAdapter;
+use Laminas\Log\Writer\Stream;
 
 abstract class AbstractLogger
 {

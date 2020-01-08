@@ -3,7 +3,7 @@
 namespace LosMiddleware\LosLog;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\ServiceManager\ServiceManager;
 use org\bovigo\vfs\vfsStream;
 
 class HttpLogFactoryTest extends TestCase

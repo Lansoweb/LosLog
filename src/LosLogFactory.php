@@ -1,7 +1,7 @@
 <?php
 namespace LosMiddleware\LosLog;
 
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class LosLogFactory implements FactoryInterface
 {

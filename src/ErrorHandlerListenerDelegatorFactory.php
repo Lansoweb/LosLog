@@ -3,8 +3,8 @@ namespace LosMiddleware\LosLog;
 
 use Interop\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use Zend\ServiceManager\Factory\DelegatorFactoryInterface;
-use Zend\Stratigility\Middleware\ErrorHandler;
+use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
+use Laminas\Stratigility\Middleware\ErrorHandler;
 
 class ErrorHandlerListenerDelegatorFactory implements DelegatorFactoryInterface
 {

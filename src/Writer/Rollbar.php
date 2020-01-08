@@ -5,8 +5,8 @@ namespace LosMiddleware\LosLog\Writer;
 use DateTime;
 use Rollbar\Payload\Level;
 use RollbarNotifier;
-use Zend\Log\Formatter\FormatterInterface;
-use Zend\Log\Writer\AbstractWriter;
+use Laminas\Log\Formatter\FormatterInterface;
+use Laminas\Log\Writer\AbstractWriter;
 
 /**
  * Rollbar log writer.

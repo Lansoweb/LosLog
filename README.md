@@ -16,9 +16,9 @@ This module provides some useful log classes:
 ## Requirements
 
 * php >= 5.6.0
-* zendframework/zend-stratigility
-* zendframework/zend-diactoros
-* zendframework/zend-log
+* laminas/laminas-stratigility
+* laminas/laminas-diactoros
+* laminas/laminas-log
 
 ## Instalation
 
@@ -120,7 +120,7 @@ require 'init_autoloader.php';
 
 \LosMiddleware\LosLog\ErrorLogger::registerHandlers();
 
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+Laminas\Mvc\Application::init(require 'config/application.config.php')->run();
 ```
 #### Zend Expressive
 ```php
@@ -132,8 +132,8 @@ $container = require 'config/container.php';
 
 \LosMiddleware\LosLog\ErrorLogger::registerHandlers('error.log', '/tmp');
 
-/* @var \Zend\Expressive\Application $api */
-$app = $container->get('Zend\Expressive\Application');
+/* @var \Mezzio\Application $api */
+$app = $container->get('Mezzio\Application');
 
 $app->run();
 ```
@@ -162,7 +162,7 @@ require 'init_autoloader.php';
 
 \LosMiddleware\LosLog\ExceptionLogger::registerHandlers('exception.log', '/tmp');
 
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+Laminas\Mvc\Application::init(require 'config/application.config.php')->run();
 ```
 #### Zend Expressive
 ```php
@@ -174,8 +174,8 @@ $container = require 'config/container.php';
 
 \LosMiddleware\LosLog\ExceptionLogger::registerHandlers('exception.log', '/tmp');
 
-/* @var \Zend\Expressive\Application $api */
-$app = $container->get('Zend\Expressive\Application');
+/* @var \Mezzio\Application $api */
+$app = $container->get('Mezzio\Application');
 
 $app->run();
 ```
@@ -187,16 +187,16 @@ $app->run();
 Previous: "data/logs2/erros.log" cannot be opened with mode "a" in <dir>/vendor/zendframework/zendframework/library/Zend/Log/Writer/Stream.php in line 87.
 Previous: fopen(data/logs2/erros.log): failed to open stream: No such file or directory in <dir>/vendor/zendframework/zendframework/library/Zend/Log/Writer/Stream.php in line 84.
 Trace:
-#0 <dir>/vendor/zendframework/zendframework/library/Zend/ServiceManager/ServiceManager.php(843): Zend\ServiceManager\ServiceManager->createServiceViaCallback(Object(Closure), 'teste', 'Application\Service\Tes...')
-#1 <dir>/vendor/zendframework/zendframework/library/Zend/ServiceManager/ServiceManager.php(487): Zend\ServiceManager\ServiceManager->createFromFactory('teste', 'Application\Service\Tes...')
-#2 <dir>/vendor/zendframework/zendframework/library/Zend/ServiceManager/ServiceManager.php(442): Zend\ServiceManager\ServiceManager->create(Array)
-#3 <dir>/src/Application/Module.php(29): Zend\ServiceManager\ServiceManager->get('Application\Service\Tes...')
-#4 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
-#5 <dir>/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
-#6 <dir>/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(208): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
-#7 <dir>/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(146): Zend\EventManager\EventManager->trigger('bootstrap', Object(Zend\Mvc\MvcEvent))
-#8 <dir>/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(243): Zend\Mvc\Application->bootstrap()
-#9 <dir>/public/index.php(23): Zend\Mvc\Application::init(Array)
+#0 <dir>/vendor/zendframework/zendframework/library/Zend/ServiceManager/ServiceManager.php(843): Laminas\ServiceManager\ServiceManager->createServiceViaCallback(Object(Closure), 'teste', 'Application\Service\Tes...')
+#1 <dir>/vendor/zendframework/zendframework/library/Zend/ServiceManager/ServiceManager.php(487): Laminas\ServiceManager\ServiceManager->createFromFactory('teste', 'Application\Service\Tes...')
+#2 <dir>/vendor/zendframework/zendframework/library/Zend/ServiceManager/ServiceManager.php(442): Laminas\ServiceManager\ServiceManager->create(Array)
+#3 <dir>/src/Application/Module.php(29): Laminas\ServiceManager\ServiceManager->get('Application\Service\Tes...')
+#4 [internal function]: Application\Module->onBootstrap(Object(Laminas\Mvc\MvcEvent))
+#5 <dir>/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Laminas\Mvc\MvcEvent))
+#6 <dir>/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(208): Laminas\EventManager\EventManager->triggerListeners('bootstrap', Object(Laminas\Mvc\MvcEvent), Array)
+#7 <dir>/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(146): Laminas\EventManager\EventManager->trigger('bootstrap', Object(Laminas\Mvc\MvcEvent))
+#8 <dir>/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(243): Laminas\Mvc\Application->bootstrap()
+#9 <dir>/public/index.php(23): Laminas\Mvc\Application::init(Array)
 #10 {main}
 ```
 

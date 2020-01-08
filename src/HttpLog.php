@@ -9,8 +9,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use Zend\Diactoros\Request\Serializer as RequestSerializer;
-use Zend\Diactoros\Response\Serializer as ResponseSerializer;
+use Laminas\Diactoros\Request\Serializer as RequestSerializer;
+use Laminas\Diactoros\Response\Serializer as ResponseSerializer;
 use Psr\Http\Server\MiddlewareInterface;
 
 class HttpLog implements MiddlewareInterface
