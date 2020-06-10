@@ -46,7 +46,7 @@ return [
             LosMiddleware\LosLog\LosLog::class => LosMiddleware\LosLog\LosLogFactory::class,
         ],
         'delegators' => [
-      		ErrorHandler;::class => [
+      		ErrorHandler::class => [
             	LosMiddleware\LosLog\ErrorHandlerListenerDelegatorFactory::class,
         	],
     	],
