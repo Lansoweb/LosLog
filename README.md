@@ -1,4 +1,11 @@
 # LosLog
+
+> [!WARNING]
+> ## Archived
+> LosLog is no longer maintained and will receive no further releases. Migrate
+> to [`monolog/monolog`](https://seldaek.github.io/monolog/) through PSR-3 and
+> use your framework's error handler. Recreate HTTP request/response logging as
+> small application middleware only where it remains necessary.
 [![Build Status](https://travis-ci.org/Lansoweb/LosLog.svg?branch=master)](https://travis-ci.org/Lansoweb/LosLog) [![Latest Stable Version](https://poser.pugx.org/los/loslog/v/stable.svg)](https://packagist.org/packages/los/loslog) [![Total Downloads](https://poser.pugx.org/los/loslog/downloads.svg)](https://packagist.org/packages/los/loslog) [![Coverage Status](https://coveralls.io/repos/Lansoweb/LosLog/badge.svg)](https://coveralls.io/r/Lansoweb/LosLog) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lansoweb/LosLog/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lansoweb/LosLog/?branch=master) [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/7a5421e3-5494-4ab8-bbfc-9fbae368148d.svg?style=flat)](https://insight.sensiolabs.com/projects/7a5421e3-5494-4ab8-bbfc-9fbae368148d) [![Dependency Status](https://www.versioneye.com/user/projects/54da834fc1bbbda013000282/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54da834fc1bbbda013000282)
 
 ## Introduction
